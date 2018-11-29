@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>io.openmessaging</groupId>
+        <artifactId>parent</artifactId>
+        <version>0.3.1-alpha</version>
+    </parent>
+    <artifactId>connector</artifactId>
+
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/io.openmessaging/openmessaging-api -->
+        <dependency>
+            <groupId>io.openmessaging</groupId>
+            <artifactId>openmessaging-api</artifactId>
+            <version>0.3.1-alpha</version>
+        </dependency>
+        <dependency>
+            <groupId>io.openmessaging</groupId>
+            <artifactId>openmessaging-api-samples</artifactId>
+            <version>0.3.1-alpha</version>
+        </dependency>
+    </dependencies>
+
+</project>
