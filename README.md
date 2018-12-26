@@ -1,7 +1,7 @@
 # openmessaging-connector
 
 ## Introduction
-Open Messaging connector is a tool to connect between data sources and data destinations. Users could easily create connector instances with configurations via REST api.
+Open Messaging connector is a standard to connect between data sources and data destinations. Users could easily create connector instances with configurations via REST api.
 
 There is two type of connector, source connector to read data and push them as message to corresponding queue, and sink connector to receive message from queue and load into data destinations.
 
