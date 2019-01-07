@@ -19,7 +19,7 @@ public class WorkerSinkConnector extends WorkerConnector {
 
   @Override
   public void init() {
-    map = OMS.getMessagingAccessPoint(getConfig().getString("AcessPoint"));
+    map = OMS.getMessagingAccessPoint(getConfig().getString("AccessPoint"));
     consumer = map.createPullConsumer();
     consumer.attachQueue(getConfig().getString("Queue"));
   }
