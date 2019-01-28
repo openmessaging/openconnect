@@ -1,4 +1,4 @@
-# OpenMessaging Connector
+# OpenMessaging Connect
 
 ## Introduction
 OpenMessaging Connect is a standard to connect between data sources and data destinations. Users could easily create connector instances with configurations via REST API.
@@ -24,57 +24,34 @@ as well as the key/value operations for offset management.
 
 ## Connector
 
-Connector life cycle:
+`void start(KeyValue config)`
+<br>Start the connector with the given config.
 
-`onStart(KeyValue config)`
-<br>When the connector starts. Do initialization here.
-        
+`void stop()`
+<br>Stop the connector.
 
-`onPause()`
-<br>When connector is paused by REST api. Good place to release any resources.
+`Class<? extends Task> taskClass()`
+<br>Returns the Task implementation for this Connector.
 
-`onStop()`
-<br>When connector is stopped before restart.
+`List<KeyValue> taskConfigs()`
+<br>Returns a set of configurations for Tasks based on the current configuration.
 
-`onFailed(Exception e)`
-<br>When connector encounters error.
+## Task
 
-`onDestroyed()` 
-<br>When connector is to be deleted.
+`void start(KeyValue config)`
+<br>Start the task with the given config.
 
-### Source connector
+`void stop()`
+<br>Stop the task.
+
+### Source task
+
 `Collection<Message> poll()`
-<br>Messages to be sent.
+<br>Return a collection of message entries to send.
 
-### Sink connector
-`Collection<Message> put()`
-<br>Messages received either by pushConsumer or pollConsumer.
+### Sink task
+
+`void put(Collection<Message> message)`
+<br>Put the data entries to the sink.
 
 
-## Connector Runtime
-Connector Runtime manages the lifecycle of connectors. Besides the standalone runtime, OpenMessaging Connect is evaluating the feasibility to incorporate popular resource management frameworks like YARN.  
-
-## REST API
-
-Connector Runtime provide a set of REST API for managing and monitoring connectors. 
-
-POST /connectors/{connector name}
-*Create connector with configurations.*
-
-GET /connectors/{connector name}
-*Get connector's configurations.*
-
-GET /connectors/{connector name}/status
-*Get connector's status.*
-
-PUT /connectors/{connector name}/pause
-*Pause connector. This will block pushing or receiving of connectors.*
-
-PUT /connectors/{connector name}/resume
-*Resume connector.*
-
-POST /connectors/{connector name}/restart
-*Restart connector.*
-   
-DELETE /connectors/{connector name}
-*Delete connector.*

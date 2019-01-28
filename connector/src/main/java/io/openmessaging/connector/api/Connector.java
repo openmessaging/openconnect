@@ -1,45 +1,29 @@
 package io.openmessaging.connector.api;
 
 import io.openmessaging.KeyValue;
+import java.util.List;
 
-/**
- * A connector is built at runtime through rest api.
- * A connector can holds multiple producer or consumer. Queue names is essential in configs.
- *
- */
 public interface Connector {
-    enum Status {
-        STARTING,
-        RUNNING,
-        PAUSED,
-        STOPPED,
-        FAILED,
-        DESTROYED
-    }
 
     /**
-     * Called when the connector clean starts.
-     * @param config config passed by rest api. Config should include queue names.
+     * Start the connector with the given config.
      */
-    public void onStart(KeyValue config);
+    void start(KeyValue config);
 
     /**
-     * When the task is paused.
+     * Stop the connector.
      */
-    public void onPause();
+    void stop();
 
     /**
-     * When the task is called stop.
+     * Returns the Task implementation for this Connector.
+     * @return
      */
-    public void onStop();
+    Class<? extends Task> taskClass();
 
     /**
-     * When the task throws unrecoverable exception and should be stopped.
+     * Returns a set of configurations for Tasks based on the current configuration.
+     * @return
      */
-    public void onFailed(Exception e);
-
-    /**
-     * When the life cycle is about to end.
-     */
-    public void onDestroyed();
+    List<KeyValue> taskConfigs();
 }
