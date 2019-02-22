@@ -6,7 +6,7 @@ import java.util.List;
 public interface Connector {
 
     /**
-     * Should invoke before start the connector
+     * Should invoke before start the connector.
      *
      * @return error message
      */
