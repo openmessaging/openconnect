@@ -13,6 +13,11 @@ public enum FieldType {
     INT64,
 
     /**
+     * BigInteger
+     */
+    BIG_INTEGER,
+
+    /**
      * Float
      */
     FLOAT32,
@@ -23,7 +28,7 @@ public enum FieldType {
     FLOAT64,
 
     /**
-     * boolean
+     * Boolean
      */
     BOOLEAN,
 

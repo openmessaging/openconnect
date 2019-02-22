@@ -1,16 +1,14 @@
 package io.openmessaging.connector.api.data;
 
-import io.openmessaging.connector.api.sink.OMSQueue;
-
 public class SinkDataEntry extends DataEntry {
 
     public SinkDataEntry(Long queueOffset,
                          Long timestamp,
                          EntryType entryType,
-                         OMSQueue queue,
+                         String queueName,
                          Schema schema,
                          Object[] payload){
-        super(timestamp, entryType, queue, schema, payload);
+        super(timestamp, entryType, queueName, schema, payload);
         this.queueOffset = queueOffset;
     }
 

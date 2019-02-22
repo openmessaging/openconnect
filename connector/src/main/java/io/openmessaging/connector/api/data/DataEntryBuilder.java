@@ -1,7 +1,5 @@
 package io.openmessaging.connector.api.data;
 
-import io.openmessaging.connector.api.sink.OMSQueue;
-
 /**
  * Use DataEntryBuilder to build SourceDataEntry or SinkDataEntry.
  */
@@ -18,9 +16,9 @@ public class DataEntryBuilder {
     private EntryType entryType;
 
     /**
-     * Related queue.
+     * Related queue name.
      */
-    private OMSQueue queue;
+    private String queueName;
 
     /**
      * Schema of the data entry.
@@ -47,8 +45,8 @@ public class DataEntryBuilder {
         return this;
     }
 
-    public DataEntryBuilder queue(OMSQueue queue){
-        this.queue = queue;
+    public DataEntryBuilder queue(String queueName){
+        this.queueName = queueName;
         return this;
     }
 
@@ -61,12 +59,12 @@ public class DataEntryBuilder {
 
     public SourceDataEntry buildSourceDataEntry(byte[] sourcePartition, byte[] sourcePosition){
 
-        return new SourceDataEntry(sourcePartition, sourcePosition, timestamp, entryType, queue, schema, payload);
+        return new SourceDataEntry(sourcePartition, sourcePosition, timestamp, entryType, queueName, schema, payload);
     }
 
     public SinkDataEntry buildSinkDataEntry(Long queueOffset){
 
-        return new SinkDataEntry(queueOffset, timestamp, entryType, queue, schema, payload);
+        return new SinkDataEntry(queueOffset, timestamp, entryType, queueName, schema, payload);
     }
 
     private Field lookupField(String fieldName) {

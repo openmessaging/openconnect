@@ -8,26 +8,26 @@ public interface SinkTaskContext extends TaskContext {
 
     /**
      * Reset the consumer offset for the given queue.
-     * @param OMSQueue
+     * @param queueName
      * @param offset
      */
-    void resetOffset(OMSQueue OMSQueue, Long offset);
+    void resetOffset(String queueName, Long offset);
 
     /**
      * Reset the consumer offsets for the given queue.
      * @param offsets
      */
-    void resetOffset(Map<OMSQueue, Long> offsets);
+    void resetOffset(Map<String, Long> offsets);
 
     /**
      * Pause consumption of messages from the specified TopicPartitions.
-     * @param OMSQueues
+     * @param queueName
      */
-    void pause(List<OMSQueue> OMSQueues);
+    void pause(List<String> queueName);
 
     /**
      * Resume consumption of messages from previously paused TopicPartitions.
-     * @param OMSQueues
+     * @param queueName
      */
-    void resume(List<OMSQueue> OMSQueues);
+    void resume(List<String> queueName);
 }

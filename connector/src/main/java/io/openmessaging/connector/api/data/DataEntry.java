@@ -1,17 +1,15 @@
 package io.openmessaging.connector.api.data;
 
-import io.openmessaging.connector.api.sink.OMSQueue;
-
 public abstract class DataEntry {
 
     public DataEntry(Long timestamp,
                      EntryType entryType,
-                     OMSQueue queue,
+                     String queueName,
                      Schema schema,
                      Object[] payload){
         this.timestamp = timestamp;
         this.entryType = entryType;
-        this.queue = queue;
+        this.queueName = queueName;
         this.schema = schema;
         this.payload = payload;
     }
@@ -27,9 +25,9 @@ public abstract class DataEntry {
     private EntryType entryType;
 
     /**
-     * Related queue.
+     * Related queueName.
      */
-    private OMSQueue queue;
+    private String queueName;
 
     /**
      * Schema of the data entry.
@@ -57,12 +55,12 @@ public abstract class DataEntry {
         this.entryType = entryType;
     }
 
-    public OMSQueue getQueue() {
-        return queue;
+    public String getQueueName() {
+        return queueName;
     }
 
-    public void setQueue(OMSQueue queue) {
-        this.queue = queue;
+    public void setQueueName(String queueName) {
+        this.queueName = queueName;
     }
 
     public Schema getSchema() {

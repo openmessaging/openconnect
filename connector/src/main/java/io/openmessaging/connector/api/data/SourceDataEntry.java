@@ -1,17 +1,15 @@
 package io.openmessaging.connector.api.data;
 
-import io.openmessaging.connector.api.sink.OMSQueue;
-
 public class SourceDataEntry extends DataEntry {
 
     public SourceDataEntry(byte[] sourcePartition,
                            byte[] sourcePosition,
                            Long timestamp,
                            EntryType entryType,
-                           OMSQueue queue,
+                           String queueName,
                            Schema schema,
                            Object[] payload){
-        super(timestamp, entryType, queue, schema, payload);
+        super(timestamp, entryType, queueName, schema, payload);
         this.sourcePartition = sourcePartition;
         this.sourcePosition = sourcePosition;
     }
