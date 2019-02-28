@@ -18,9 +18,9 @@
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>io.openmessaging.connect</groupId>
-    <artifactId>connect</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <groupId>io.openmessaging</groupId>
+    <artifactId>openmessaging-connect</artifactId>
+    <version>0.1.0-alpha</version>
     <name>OpenMessaging Connect</name>
     <packaging>pom</packaging>
 
