@@ -25,7 +25,7 @@
 
     <groupId>io.openmessaging</groupId>
     <artifactId>parent</artifactId>
-    <version>0.1.0-alpha</version>
+    <version>0.1.0-beta</version>
     <name>OpenMessaging Connect</name>
     <packaging>pom</packaging>
 
