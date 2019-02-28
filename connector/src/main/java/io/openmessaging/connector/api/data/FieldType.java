@@ -17,6 +17,12 @@
 
 package io.openmessaging.connector.api.data;
 
+/**
+ * Define the field type.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
+ */
 public enum FieldType {
 
     /**

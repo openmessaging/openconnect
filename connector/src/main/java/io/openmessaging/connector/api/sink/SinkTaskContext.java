@@ -23,6 +23,9 @@ import java.util.Map;
 
 /**
  * A context allow sink task to access the runtime.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public interface SinkTaskContext extends TaskContext {
 

@@ -21,6 +21,9 @@ import io.openmessaging.KeyValue;
 
 /**
  * Base context class. Allow task to access the configs of the runtime.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public interface TaskContext {
 

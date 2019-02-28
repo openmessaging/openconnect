@@ -21,6 +21,9 @@ import io.openmessaging.connector.api.Connector;
 
 /**
  * SinkConnectors implement the Connector interface to send data from message queue to another system.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public abstract class SinkConnector implements Connector {
 }

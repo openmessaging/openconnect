@@ -17,6 +17,12 @@
 
 package io.openmessaging.connector.api.data;
 
+/**
+ * Filed of the schema.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
+ */
 public class Field {
 
     /**

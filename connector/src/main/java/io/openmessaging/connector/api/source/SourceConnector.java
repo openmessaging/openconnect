@@ -22,6 +22,9 @@ import io.openmessaging.connector.api.Connector;
 /**
  * SourceConnectors implement the connector interface to pull data from another system and send it specific message
  * queue.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public abstract class SourceConnector implements Connector {
 }

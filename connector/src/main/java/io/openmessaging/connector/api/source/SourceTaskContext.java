@@ -22,6 +22,9 @@ import io.openmessaging.connector.api.TaskContext;
 
 /**
  * A context allow source task to access the runtime.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public interface SourceTaskContext extends TaskContext {
 

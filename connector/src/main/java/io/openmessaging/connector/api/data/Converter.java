@@ -20,7 +20,8 @@ package io.openmessaging.connector.api.data;
 /**
  * A converter used to convert between {@link DataEntry} and byte[].
  *
- * @param <T>
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public interface Converter<T> {
 

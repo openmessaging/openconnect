@@ -19,6 +19,9 @@ package io.openmessaging.connector.api.data;
 
 /**
  * SinkDataEntry is read from message queue and includes the queueOffset of the data in message queue.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public class SinkDataEntry extends DataEntry {
 

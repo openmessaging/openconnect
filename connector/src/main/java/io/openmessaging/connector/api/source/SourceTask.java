@@ -23,6 +23,9 @@ import java.util.Collection;
 
 /**
  * SourceTask is a Task that pulls records from another system for storage in message queue.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public abstract class SourceTask implements Task {
 

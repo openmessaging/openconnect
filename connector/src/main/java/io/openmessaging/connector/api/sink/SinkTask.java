@@ -23,6 +23,9 @@ import java.util.Collection;
 
 /**
  * SinkTask is a task takes from message queue and send them to another system.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public abstract class SinkTask implements Task {
 

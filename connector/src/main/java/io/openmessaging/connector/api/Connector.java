@@ -22,6 +22,9 @@ import java.util.List;
 
 /**
  * Connector has the responsibility of manage the data integration between message queue and other system.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public interface Connector {
 

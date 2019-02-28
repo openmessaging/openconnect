@@ -19,6 +19,9 @@ package io.openmessaging.connector.api.data;
 
 /**
  * Use DataEntryBuilder to build SourceDataEntry or SinkDataEntry.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public class DataEntryBuilder {
 

@@ -19,6 +19,12 @@ package io.openmessaging.connector.api.data;
 
 import java.util.List;
 
+/**
+ * Schema
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
+ */
 public class Schema {
 
     /**

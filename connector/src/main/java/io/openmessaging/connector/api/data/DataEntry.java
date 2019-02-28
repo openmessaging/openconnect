@@ -19,6 +19,9 @@ package io.openmessaging.connector.api.data;
 
 /**
  * Base class for records containing data to be copied to/from message queue.
+ *
+ * @version OMS 0.1.0
+ * @since OMS 0.1.0
  */
 public abstract class DataEntry {
 
