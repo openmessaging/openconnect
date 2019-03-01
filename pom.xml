@@ -24,11 +24,10 @@
     </parent>
 
     <groupId>io.openmessaging</groupId>
-    <artifactId>parent</artifactId>
-    <version>0.1.0-beta</version>
+    <artifactId>openmessaging-connect</artifactId>
+    <version>0.1.0-alpha</version>
     <name>OpenMessaging Connect</name>
     <packaging>pom</packaging>
-
 
     <modules>
         <module>connector</module>
