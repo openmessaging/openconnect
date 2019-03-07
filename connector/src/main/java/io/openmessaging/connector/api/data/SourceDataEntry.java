@@ -1,9 +1,11 @@
 package io.openmessaging.connector.api.data;
 
+import java.nio.ByteBuffer;
+
 public class SourceDataEntry extends DataEntry {
 
-    public SourceDataEntry(byte[] sourcePartition,
-                           byte[] sourcePosition,
+    public SourceDataEntry(ByteBuffer sourcePartition,
+                           ByteBuffer sourcePosition,
                            Long timestamp,
                            EntryType entryType,
                            String queueName,
@@ -17,26 +19,26 @@ public class SourceDataEntry extends DataEntry {
     /**
      * Partition of the data source.
      */
-    private byte[] sourcePartition;
+    private ByteBuffer sourcePartition;
 
     /**
      * position of current data entry in data source.
      */
-    private byte[] sourcePosition;
+    private ByteBuffer sourcePosition;
 
-    public byte[] getSourcePartition() {
+    public ByteBuffer getSourcePartition() {
         return sourcePartition;
     }
 
-    public void setSourcePartition(byte[] sourcePartition) {
+    public void setSourcePartition(ByteBuffer sourcePartition) {
         this.sourcePartition = sourcePartition;
     }
 
-    public byte[] getSourcePosition() {
+    public ByteBuffer getSourcePosition() {
         return sourcePosition;
     }
 
-    public void setSourcePosition(byte[] sourcePosition) {
+    public void setSourcePosition(ByteBuffer sourcePosition) {
         this.sourcePosition = sourcePosition;
     }
 }

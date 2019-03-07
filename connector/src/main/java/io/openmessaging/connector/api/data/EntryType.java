@@ -2,18 +2,12 @@ package io.openmessaging.connector.api.data;
 
 public enum EntryType {
 
-    /**
-     * Create a record.
-     */
-    CREATE,
+  /** Create a record. */
+  CREATE,
 
-    /**
-     * Update a record.
-     */
-    UPDATE,
+  /** Update a record. */
+  UPDATE,
 
-    /**
-     * Delete a record.
-     */
-    DELETE
+  /** Delete a record. */
+  DELETE
 }

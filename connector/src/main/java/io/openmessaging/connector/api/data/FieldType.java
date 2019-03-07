@@ -2,58 +2,36 @@ package io.openmessaging.connector.api.data;
 
 public enum FieldType {
 
-    /**
-     * Integer
-     */
-    INT32,
+  /** Integer */
+  INT32,
 
-    /**
-     * Long
-     */
-    INT64,
+  /** Long */
+  INT64,
 
-    /**
-     * BigInteger
-     */
-    BIG_INTEGER,
+  /** BigInteger */
+  BIG_INTEGER,
 
-    /**
-     * Float
-     */
-    FLOAT32,
+  /** Float */
+  FLOAT32,
 
-    /**
-     * Double
-     */
-    FLOAT64,
+  /** Double */
+  FLOAT64,
 
-    /**
-     * Boolean
-     */
-    BOOLEAN,
+  /** Boolean */
+  BOOLEAN,
 
-    /**
-     * String
-     */
-    STRING,
+  /** String */
+  STRING,
 
-    /**
-     * Byte
-     */
-    BYTES,
+  /** Byte */
+  BYTES,
 
-    /**
-     * List
-     */
-    ARRAY,
+  /** List */
+  ARRAY,
 
-    /**
-     * Map
-     */
-    MAP,
+  /** Map */
+  MAP,
 
-    /**
-     * Date
-     */
-    DATETIME;
+  /** Date */
+  DATETIME;
 }
