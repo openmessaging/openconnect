@@ -14,17 +14,15 @@
     specific language governing permissions and limitations
     under the License.
 -->
-<project xmlns="http://maven.apache.org/POM/4.0.0"
-         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <groupId>io.openmessaging.connect</groupId>
-        <artifactId>connect</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <groupId>io.openmessaging</groupId>
+        <artifactId>openmessaging-connect</artifactId>
+        <version>0.1.0-beta</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>connector</artifactId>
+    <artifactId>openmessaging-connector</artifactId>
     <dependencies>
         <dependency>
             <groupId>io.openmessaging</groupId>
