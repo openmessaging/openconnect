@@ -28,16 +28,16 @@ public interface Converter<T> {
     /**
      * Method to serialize the {@link DataEntry}.
      *
-     * @param object
-     * @return
+     * @param object this object needs to be converted to byte[].
+     * @return converted value.
      */
     byte[] objectToByte(T object);
 
     /**
      * Method to deserialize the {@link DataEntry}.
      *
-     * @param bytes
-     * @return
+     * @param bytes this bytes needs to be converted to the required class.
+     * @return converted value.
      */
     T byteToObject(byte[] bytes);
 }

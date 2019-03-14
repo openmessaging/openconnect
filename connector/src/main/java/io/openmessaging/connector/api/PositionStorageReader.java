@@ -17,6 +17,7 @@
 
 package io.openmessaging.connector.api;
 
+import java.nio.ByteBuffer;
 import java.util.Collection;
 import java.util.Map;
 
@@ -34,7 +35,7 @@ public interface PositionStorageReader {
      * @param partition
      * @return
      */
-    byte[] getPosition(byte[] partition);
+    ByteBuffer getPosition(ByteBuffer partition);
 
     /**
      * Get a set of positions for the specified partitions.
@@ -42,5 +43,5 @@ public interface PositionStorageReader {
      * @param partitions
      * @return
      */
-    Map<byte[], byte[]> getPositions(Collection<byte[]> partitions);
+    Map<ByteBuffer,ByteBuffer> getPositions(Collection<ByteBuffer> partitions);
 }

@@ -34,7 +34,7 @@ public abstract class SinkTask implements Task {
     /**
      * Initialize this sinkTask.
      *
-     * @param context
+     * @param context the context of current task.
      */
     public void initialize(SinkTaskContext context) {
         this.context = context;

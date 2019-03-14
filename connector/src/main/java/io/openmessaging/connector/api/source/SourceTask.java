@@ -34,7 +34,7 @@ public abstract class SourceTask implements Task {
     /**
      * Initialize this sourceTask.
      *
-     * @param context
+     * @param context the context of current task.
      */
     public void initialize(SourceTaskContext context) {
         this.context = context;
@@ -44,4 +44,10 @@ public abstract class SourceTask implements Task {
      * Return a collection of message entries to send.
      */
     public abstract Collection<SourceDataEntry> poll();
+
+    /**
+     * If the user wants to use external storage to save the position,user can implement this
+     * function.
+     */
+    public void commit() {}
 }

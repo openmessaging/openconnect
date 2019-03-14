@@ -30,7 +30,7 @@ public interface TaskContext {
     /**
      * Get the configurations of current task.
      *
-     * @return
+     * @return the configuration of current task.
      */
     KeyValue configs();
 }

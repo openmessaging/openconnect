@@ -17,6 +17,8 @@
 
 package io.openmessaging.connector.api.data;
 
+import java.nio.ByteBuffer;
+
 /**
  * Use DataEntryBuilder to build SourceDataEntry or SinkDataEntry.
  *
@@ -77,7 +79,7 @@ public class DataEntryBuilder {
         return this;
     }
 
-    public SourceDataEntry buildSourceDataEntry(byte[] sourcePartition, byte[] sourcePosition) {
+    public SourceDataEntry buildSourceDataEntry(ByteBuffer sourcePartition, ByteBuffer sourcePosition) {
 
         return new SourceDataEntry(sourcePartition, sourcePosition, timestamp, entryType, queueName, schema, payload);
     }

@@ -30,7 +30,7 @@ public interface Task {
     /**
      * Start the task with the given config.
      *
-     * @param config
+     * @param config the configuration information needed to start this task.
      */
     void start(KeyValue config);
 
