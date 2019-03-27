@@ -130,7 +130,7 @@
         <dependencies>
             <dependency>
                 <groupId>${project.groupId}</groupId>
-                <artifactId>connector</artifactId>
+                <artifactId>connect</artifactId>
                 <version>${project.version}</version>
             </dependency>
             <dependency>

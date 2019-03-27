@@ -22,7 +22,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>openmessaging-connector</artifactId>
+    <artifactId>openmessaging-connect</artifactId>
     <dependencies>
         <dependency>
             <groupId>io.openmessaging</groupId>
