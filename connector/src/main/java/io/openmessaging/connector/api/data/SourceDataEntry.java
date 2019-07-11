@@ -49,6 +49,19 @@ public class SourceDataEntry extends DataEntry {
      */
     private ByteBuffer sourcePosition;
 
+    /**
+     * queue selector argment.
+     */
+    private String queueSelectorArg;
+
+    public String getQueueSelectorArg() { 
+        return queueSelectorArg; 
+    }
+
+    public void setQueueSelectorArg(String queueSelectorArg) { 
+        this.queueSelectorArg = queueSelectorArg; 
+    }
+    
     public ByteBuffer getSourcePartition() {
         return sourcePartition;
     }
