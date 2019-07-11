@@ -70,4 +70,12 @@ public class Field {
     public void setType(FieldType type) {
         this.type = type;
     }
+
+    @Override public String toString() {
+        return "Field{" +
+            "index=" + index +
+            ", name='" + name + '\'' +
+            ", type=" + type +
+            '}';
+    }
 }

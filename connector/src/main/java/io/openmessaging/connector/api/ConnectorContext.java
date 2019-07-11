@@ -14,43 +14,26 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
-package io.openmessaging.connector.api.data;
+package io.openmessaging.connector.api;
 
 /**
- * SinkDataEntry is read from message queue and includes the queueOffset of the data in message queue.
+ * ConnectorContext allows Connectors to proactively interact with the Connect runtime.
  *
  * @version OMS 0.1.0
  * @since OMS 0.1.0
  */
-public class SinkDataEntry extends DataEntry {
-
-    public SinkDataEntry(Long queueOffset,
-        Long timestamp,
-        EntryType entryType,
-        String queueName,
-        Schema schema,
-        Object[] payload) {
-        super(timestamp, entryType, queueName, schema, payload);
-        this.queueOffset = queueOffset;
-    }
+public interface ConnectorContext {
+    /**
+     * Requests that the runtime reconfigure the Tasks for this source. This should be used to indicate to the runtime
+     * that something about the input/output has changed and the running Tasks will need to be modified.
+     */
+    void requestTaskReconfiguration();
 
     /**
-     * Offset in the message queue.
+     * Raise an unrecoverable exception to the Connect framework. This will cause the status of the connector to
+     * transition to FAILED.
+     *
+     * @param e Exception to be raised.
      */
-    private Long queueOffset;
-
-    public Long getQueueOffset() {
-        return queueOffset;
-    }
-
-    public void setQueueOffset(Long queueOffset) {
-        this.queueOffset = queueOffset;
-    }
-
-    @Override public String toString() {
-        return "SinkDataEntry{" +
-            "queueOffset=" + queueOffset +
-            "} " + super.toString();
-    }
+    void raiseError(Exception e);
 }

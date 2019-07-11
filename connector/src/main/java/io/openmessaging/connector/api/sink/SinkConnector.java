@@ -25,5 +25,5 @@ import io.openmessaging.connector.api.Connector;
  * @version OMS 0.1.0
  * @since OMS 0.1.0
  */
-public abstract class SinkConnector implements Connector {
+public abstract class SinkConnector extends Connector {
 }
