@@ -43,6 +43,11 @@ public class DataEntryBuilder {
     private String queueName;
 
     /**
+     * queue selector argment.
+     */
+    private String queueSelectorArg;
+    
+    /**
      * Schema of the data entry.
      */
     private Schema schema;
@@ -72,6 +77,11 @@ public class DataEntryBuilder {
         return this;
     }
 
+    public DataEntryBuilder queueSelectorArg(String queueSelectorArg) {
+        this.queueSelectorArg = queueSelectorArg;
+        return this;
+    }    
+    
     public DataEntryBuilder putFiled(String fieldName, Object value) {
 
         Field field = lookupField(fieldName);
