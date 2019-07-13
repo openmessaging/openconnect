@@ -34,7 +34,18 @@ public class SourceDataEntry extends DataEntry {
         String queueName,
         Schema schema,
         Object[] payload) {
-        super(timestamp, entryType, queueName, schema, payload);
+        this(sourcePartition, sourcePosition, timestamp, entryType, queueName, schema, null, payload);
+    }
+
+    public SourceDataEntry(ByteBuffer sourcePartition,
+        ByteBuffer sourcePosition,
+        Long timestamp,
+        EntryType entryType,
+        String queueName,
+        Schema schema,
+        String shardingKey,
+        Object[] payload) {
+        super(timestamp, entryType, queueName, schema, shardingKey, payload);
         this.sourcePartition = sourcePartition;
         this.sourcePosition = sourcePosition;
     }
@@ -49,19 +60,6 @@ public class SourceDataEntry extends DataEntry {
      */
     private ByteBuffer sourcePosition;
 
-    /**
-     * queue selector argment.
-     */
-    private String queueSelectorArg;
-
-    public String getQueueSelectorArg() { 
-        return queueSelectorArg; 
-    }
-
-    public void setQueueSelectorArg(String queueSelectorArg) { 
-        this.queueSelectorArg = queueSelectorArg; 
-    }
-    
     public ByteBuffer getSourcePartition() {
         return sourcePartition;
     }

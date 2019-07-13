@@ -32,10 +32,20 @@ public abstract class DataEntry {
         String queueName,
         Schema schema,
         Object[] payload) {
+        this(timestamp, entryType, queueName, schema, null, payload);
+    }
+
+    public DataEntry(Long timestamp,
+        EntryType entryType,
+        String queueName,
+        Schema schema,
+        String shardingKey,
+        Object[] payload) {
         this.timestamp = timestamp;
         this.entryType = entryType;
         this.queueName = queueName;
         this.schema = schema;
+        this.shardingKey = shardingKey;
         this.payload = payload;
     }
 
@@ -55,9 +65,16 @@ public abstract class DataEntry {
     private String queueName;
 
     /**
+     * Used for shard to related queue/partition.
+     */
+    private String shardingKey;
+
+    /**
      * Schema of the data entry.
      */
     private Schema schema;
+
+    private String ShardingKey;
 
     /**
      * Payload of the data entry.
@@ -104,12 +121,22 @@ public abstract class DataEntry {
         this.payload = payload;
     }
 
+    public String getShardingKey() {
+        return shardingKey;
+    }
+
+    public void setShardingKey(String shardingKey) {
+        this.shardingKey = shardingKey;
+    }
+
     @Override public String toString() {
         return "DataEntry{" +
             "timestamp=" + timestamp +
             ", entryType=" + entryType +
             ", queueName='" + queueName + '\'' +
+            ", shardingKey='" + shardingKey + '\'' +
             ", schema=" + schema +
+            ", ShardingKey='" + ShardingKey + '\'' +
             ", payload=" + Arrays.toString(payload) +
             '}';
     }
