@@ -44,4 +44,6 @@ public abstract class SinkTask implements Task {
      * Put the data entries to the sink.
      */
     public abstract void put(Collection<SinkDataEntry> sinkDataEntries);
+
+
 }
