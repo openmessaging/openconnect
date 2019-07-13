@@ -18,6 +18,7 @@
 package io.openmessaging.connector.api.data;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Base class for records containing data to be copied to/from message queue.
@@ -139,5 +140,26 @@ public abstract class DataEntry {
             ", ShardingKey='" + ShardingKey + '\'' +
             ", payload=" + Arrays.toString(payload) +
             '}';
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof DataEntry))
+            return false;
+        DataEntry entry = (DataEntry) o;
+        return Objects.equals(timestamp, entry.timestamp) &&
+            entryType == entry.entryType &&
+            Objects.equals(queueName, entry.queueName) &&
+            Objects.equals(shardingKey, entry.shardingKey) &&
+            Objects.equals(schema, entry.schema) &&
+            Objects.equals(ShardingKey, entry.ShardingKey) &&
+            Arrays.equals(payload, entry.payload);
+    }
+
+    @Override public int hashCode() {
+        int result = Objects.hash(timestamp, entryType, queueName, shardingKey, schema, ShardingKey);
+        result = 31 * result + Arrays.hashCode(payload);
+        return result;
     }
 }
