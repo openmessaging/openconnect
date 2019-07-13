@@ -17,6 +17,8 @@
 
 package io.openmessaging.connector.api.data;
 
+import java.util.Arrays;
+
 /**
  * Base class for records containing data to be copied to/from message queue.
  *
@@ -100,5 +102,15 @@ public abstract class DataEntry {
 
     public void setPayload(Object[] payload) {
         this.payload = payload;
+    }
+
+    @Override public String toString() {
+        return "DataEntry{" +
+            "timestamp=" + timestamp +
+            ", entryType=" + entryType +
+            ", queueName='" + queueName + '\'' +
+            ", schema=" + schema +
+            ", payload=" + Arrays.toString(payload) +
+            '}';
     }
 }

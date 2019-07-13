@@ -26,5 +26,5 @@ import io.openmessaging.connector.api.Connector;
  * @version OMS 0.1.0
  * @since OMS 0.1.0
  */
-public abstract class SourceConnector implements Connector {
+public abstract class SourceConnector extends Connector {
 }

@@ -77,4 +77,11 @@ public class SourceDataEntry extends DataEntry {
     public void setSourcePosition(ByteBuffer sourcePosition) {
         this.sourcePosition = sourcePosition;
     }
+
+    @Override public String toString() {
+        return "SourceDataEntry{" +
+            "sourcePartition=" + sourcePartition +
+            ", sourcePosition=" + sourcePosition +
+            "} " + super.toString();
+    }
 }

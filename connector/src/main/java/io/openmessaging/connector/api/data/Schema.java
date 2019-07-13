@@ -73,4 +73,12 @@ public class Schema {
         }
         return null;
     }
+
+    @Override public String toString() {
+        return "Schema{" +
+            "dataSource='" + dataSource + '\'' +
+            ", name='" + name + '\'' +
+            ", fields=" + fields +
+            '}';
+    }
 }
