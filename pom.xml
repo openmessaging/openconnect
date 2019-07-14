@@ -48,7 +48,7 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/openmessaging/openmessaging-connect</url>
+        <url>git@github.com:openmessaging/openmessaging-connect.git</url>
         <connection>scm:git:git@github.com:openmessaging/openmessaging-connect.git</connection>
         <developerConnection>scm:git:git@github.com:openmessaging/openmessaging-connect.git</developerConnection>
         <tag>HEAD</tag>
