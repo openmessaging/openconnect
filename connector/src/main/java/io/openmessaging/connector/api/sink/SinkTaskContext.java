@@ -46,16 +46,16 @@ public interface SinkTaskContext extends TaskContext {
     void resetOffset(Map<QueueMetaData, Long> offsets);
 
     /**
-     * Pause consumption of messages from the specified TopicPartitions.
+     * Pause consumption of messages from the specified Queue.
      *
-     * @param queueName the queuename to reset offset.
+     * @param queues the queue list to be reset offset.
      */
-    void pause(List<QueueMetaData> queueName);
+    void pause(List<QueueMetaData> queues);
 
     /**
-     * Resume consumption of messages from previously paused TopicPartitions.
+     * Resume consumption of messages from previously paused Queues.
      *
-     * @param queueName the queuename to reset offset.
+     * @param queues the queue list to be resume.
      */
-    void resume(List<QueueMetaData> queueName);
+    void resume(List<QueueMetaData> queues);
 }

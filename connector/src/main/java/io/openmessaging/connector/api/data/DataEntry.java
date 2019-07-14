@@ -75,8 +75,6 @@ public abstract class DataEntry {
      */
     private Schema schema;
 
-    private String ShardingKey;
-
     /**
      * Payload of the data entry.
      */
@@ -137,7 +135,6 @@ public abstract class DataEntry {
             ", queueName='" + queueName + '\'' +
             ", shardingKey='" + shardingKey + '\'' +
             ", schema=" + schema +
-            ", ShardingKey='" + ShardingKey + '\'' +
             ", payload=" + Arrays.toString(payload) +
             '}';
     }
@@ -153,12 +150,11 @@ public abstract class DataEntry {
             Objects.equals(queueName, entry.queueName) &&
             Objects.equals(shardingKey, entry.shardingKey) &&
             Objects.equals(schema, entry.schema) &&
-            Objects.equals(ShardingKey, entry.ShardingKey) &&
             Arrays.equals(payload, entry.payload);
     }
 
     @Override public int hashCode() {
-        int result = Objects.hash(timestamp, entryType, queueName, shardingKey, schema, ShardingKey);
+        int result = Objects.hash(timestamp, entryType, queueName, shardingKey, schema);
         result = 31 * result + Arrays.hashCode(payload);
         return result;
     }
