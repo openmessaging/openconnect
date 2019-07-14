@@ -18,6 +18,7 @@
 package io.openmessaging.connector.api.data;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 /**
  * Base class for records containing data to be copied to/from message queue.
@@ -32,10 +33,20 @@ public abstract class DataEntry {
         String queueName,
         Schema schema,
         Object[] payload) {
+        this(timestamp, entryType, queueName, schema, null, payload);
+    }
+
+    public DataEntry(Long timestamp,
+        EntryType entryType,
+        String queueName,
+        Schema schema,
+        String shardingKey,
+        Object[] payload) {
         this.timestamp = timestamp;
         this.entryType = entryType;
         this.queueName = queueName;
         this.schema = schema;
+        this.shardingKey = shardingKey;
         this.payload = payload;
     }
 
@@ -53,6 +64,11 @@ public abstract class DataEntry {
      * Related queueName.
      */
     private String queueName;
+
+    /**
+     * Used for shard to related queue/partition.
+     */
+    private String shardingKey;
 
     /**
      * Schema of the data entry.
@@ -104,13 +120,42 @@ public abstract class DataEntry {
         this.payload = payload;
     }
 
+    public String getShardingKey() {
+        return shardingKey;
+    }
+
+    public void setShardingKey(String shardingKey) {
+        this.shardingKey = shardingKey;
+    }
+
     @Override public String toString() {
         return "DataEntry{" +
             "timestamp=" + timestamp +
             ", entryType=" + entryType +
             ", queueName='" + queueName + '\'' +
+            ", shardingKey='" + shardingKey + '\'' +
             ", schema=" + schema +
             ", payload=" + Arrays.toString(payload) +
             '}';
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof DataEntry))
+            return false;
+        DataEntry entry = (DataEntry) o;
+        return Objects.equals(timestamp, entry.timestamp) &&
+            entryType == entry.entryType &&
+            Objects.equals(queueName, entry.queueName) &&
+            Objects.equals(shardingKey, entry.shardingKey) &&
+            Objects.equals(schema, entry.schema) &&
+            Arrays.equals(payload, entry.payload);
+    }
+
+    @Override public int hashCode() {
+        int result = Objects.hash(timestamp, entryType, queueName, shardingKey, schema);
+        result = 31 * result + Arrays.hashCode(payload);
+        return result;
     }
 }

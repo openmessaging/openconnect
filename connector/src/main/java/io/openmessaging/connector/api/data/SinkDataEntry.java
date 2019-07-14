@@ -17,6 +17,8 @@
 
 package io.openmessaging.connector.api.data;
 
+import java.util.Objects;
+
 /**
  * SinkDataEntry is read from message queue and includes the queueOffset of the data in message queue.
  *
@@ -31,7 +33,17 @@ public class SinkDataEntry extends DataEntry {
         String queueName,
         Schema schema,
         Object[] payload) {
-        super(timestamp, entryType, queueName, schema, payload);
+        this(queueOffset, timestamp, entryType, queueName, schema, null, payload);
+    }
+
+    public SinkDataEntry(Long queueOffset,
+        Long timestamp,
+        EntryType entryType,
+        String queueName,
+        Schema schema,
+        String shardingKey,
+        Object[] payload) {
+        super(timestamp, entryType, queueName, schema, shardingKey, payload);
         this.queueOffset = queueOffset;
     }
 
@@ -52,5 +64,20 @@ public class SinkDataEntry extends DataEntry {
         return "SinkDataEntry{" +
             "queueOffset=" + queueOffset +
             "} " + super.toString();
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof SinkDataEntry))
+            return false;
+        if (!super.equals(o))
+            return false;
+        SinkDataEntry entry = (SinkDataEntry) o;
+        return Objects.equals(queueOffset, entry.queueOffset);
+    }
+
+    @Override public int hashCode() {
+        return Objects.hash(super.hashCode(), queueOffset);
     }
 }

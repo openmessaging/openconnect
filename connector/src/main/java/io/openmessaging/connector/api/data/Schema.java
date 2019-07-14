@@ -18,6 +18,7 @@
 package io.openmessaging.connector.api.data;
 
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Schema
@@ -80,5 +81,20 @@ public class Schema {
             ", name='" + name + '\'' +
             ", fields=" + fields +
             '}';
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Schema))
+            return false;
+        Schema schema = (Schema) o;
+        return Objects.equals(dataSource, schema.dataSource) &&
+            Objects.equals(name, schema.name) &&
+            Objects.equals(fields, schema.fields);
+    }
+
+    @Override public int hashCode() {
+        return Objects.hash(dataSource, name, fields);
     }
 }

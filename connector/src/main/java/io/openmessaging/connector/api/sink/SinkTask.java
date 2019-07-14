@@ -18,8 +18,10 @@
 package io.openmessaging.connector.api.sink;
 
 import io.openmessaging.connector.api.Task;
+import io.openmessaging.connector.api.common.QueueMetaData;
 import io.openmessaging.connector.api.data.SinkDataEntry;
 import java.util.Collection;
+import java.util.Map;
 
 /**
  * SinkTask is a task takes from message queue and send them to another system.
@@ -44,4 +46,23 @@ public abstract class SinkTask implements Task {
      * Put the data entries to the sink.
      */
     public abstract void put(Collection<SinkDataEntry> sinkDataEntries);
+
+    /**
+     * Commit all records that have been {@link #put(Collection)} for the specified queue.
+     *
+     * @param offsets
+     */
+    public abstract void commit(Map<QueueMetaData, Long> offsets);
+
+    /**
+     * Will be invoked prior to an offset commit.
+     *
+     * @param currentOffsets
+     * @return an empty map if Connect-managed offset commit is not desired, otherwise a map of offsets by
+     * queue that are safe to commit.
+     */
+    public Map<QueueMetaData, Long> preCommit(Map<QueueMetaData, Long> currentOffsets) {
+        commit(currentOffsets);
+        return currentOffsets;
+    }
 }
