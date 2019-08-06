@@ -45,9 +45,9 @@ public class DataEntryBuilder {
     private String queueName;
 
     /**
-     * The queueId of queue.
+     * Used for shard to related queue/partition.
      */
-    private Integer queueId;
+    private String shardingKey;
 
     /**
      * Type of the data entry.
@@ -91,15 +91,15 @@ public class DataEntryBuilder {
         this.headers = new DataHeaders();
     }
 
-    public static DataEntryBuilder newDataEntryBuilder(Meta keyMeta, Meta valueMeta){
+    public static DataEntryBuilder newDataEntryBuilder(Meta keyMeta, Meta valueMeta) {
         return new DataEntryBuilder(keyMeta, valueMeta);
     }
 
-    public static DataEntryBuilder newDataEntryBuilder(Meta valueMeta){
+    public static DataEntryBuilder newDataEntryBuilder(Meta valueMeta) {
         return new DataEntryBuilder(valueMeta);
     }
 
-    public static DataEntryBuilder newDataEntryBuilder(){
+    public static DataEntryBuilder newDataEntryBuilder() {
         return new DataEntryBuilder();
     }
 
@@ -108,8 +108,8 @@ public class DataEntryBuilder {
         return this;
     }
 
-    public DataEntryBuilder queueId(Integer queueId){
-        this.queueId = queueId;
+    public DataEntryBuilder shardingKey(String shardingKey) {
+        this.shardingKey = shardingKey;
         return this;
     }
 
@@ -125,120 +125,119 @@ public class DataEntryBuilder {
 
     // headers
 
-    public DataEntryBuilder header(Header header){
+    public DataEntryBuilder header(Header header) {
         this.headers.add(header);
         return this;
     }
 
-    public DataEntryBuilder header(String key, Meta meta, Object value){
+    public DataEntryBuilder header(String key, Meta meta, Object value) {
         this.headers.add(key, meta, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, String value){
+    public DataEntryBuilder header(String key, String value) {
         this.headers.addString(key, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, boolean value){
+    public DataEntryBuilder header(String key, boolean value) {
         this.headers.addBoolean(key, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, byte value){
+    public DataEntryBuilder header(String key, byte value) {
         this.headers.addByte(key, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, short value){
+    public DataEntryBuilder header(String key, short value) {
         this.headers.addShort(key, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, int value){
+    public DataEntryBuilder header(String key, int value) {
         this.headers.addInt(key, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, long value){
+    public DataEntryBuilder header(String key, long value) {
         this.headers.addLong(key, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, float value){
+    public DataEntryBuilder header(String key, float value) {
         this.headers.addFloat(key, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, double value){
+    public DataEntryBuilder header(String key, double value) {
         this.headers.addDouble(key, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, byte[] value){
+    public DataEntryBuilder header(String key, byte[] value) {
         this.headers.addBytes(key, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, List<?> value, Meta meta){
+    public DataEntryBuilder header(String key, List<?> value, Meta meta) {
         this.headers.addList(key, value, meta);
         return this;
     }
 
-    public DataEntryBuilder header(String key, Map<?, ?> value, Meta meta){
+    public DataEntryBuilder header(String key, Map<?, ?> value, Meta meta) {
         this.headers.addMap(key, value, meta);
         return this;
     }
 
-    public DataEntryBuilder header(String key, Struct value){
+    public DataEntryBuilder header(String key, Struct value) {
         this.headers.addStruct(key, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, BigDecimal value){
+    public DataEntryBuilder header(String key, BigDecimal value) {
         this.headers.addDecimal(key, value);
         return this;
     }
 
-    public DataEntryBuilder header(String key, java.util.Date value){
+    public DataEntryBuilder header(String key, java.util.Date value) {
         this.headers.addDate(key, value);
         return this;
     }
 
-    public DataEntryBuilder keyMeta(Meta keyMeta){
+    public DataEntryBuilder keyMeta(Meta keyMeta) {
         MetaAndData tmpKey = new MetaAndData(keyMeta);
-        if(this.key != null && this.key.getData() != null){
+        if (this.key != null && this.key.getData() != null) {
             tmpKey.putData(this.key.getData());
         }
         this.key = tmpKey;
         return this;
     }
 
-    public DataEntryBuilder valueMeta(Meta valueMeta){
+    public DataEntryBuilder valueMeta(Meta valueMeta) {
         MetaAndData tmpValue = new MetaAndData(valueMeta);
-        if(this.value != null && this.value.getData() != null){
+        if (this.value != null && this.value.getData() != null) {
             tmpValue.putData(this.value.getData());
         }
         this.value = tmpValue;
         return this;
     }
 
-
     // base
 
-    public DataEntryBuilder keyData(Object data){
-        switch (this.key.getMeta().getType()){
+    public DataEntryBuilder keyData(Object data) {
+        switch (this.key.getMeta().getType()) {
             case STRUCT:
                 List<Field> fields = null;
-                if(data instanceof Struct){
+                if (data instanceof Struct) {
                     fields = ((Struct)data).getFields();
-                } else if(data instanceof MetaAndData){
+                } else if (data instanceof MetaAndData) {
                     fields = ((MetaAndData)data).getMeta().getFields();
-                } else{
+                } else {
                     MetaAndData strData = MetaAndData.getMetaDataFromString(data.toString());
                     fields = strData.getMeta().getFields();
                 }
-                if(fields != null){
+                if (fields != null) {
                     for (int i = 0; i < fields.size(); i++) {
                         String fieldName = fields.get(i).name();
                         keyData(fieldName, ((Struct)data).getObject(fieldName));
@@ -258,19 +257,19 @@ public class DataEntryBuilder {
         return this;
     }
 
-    public DataEntryBuilder valueData(Object data){
-        switch (this.value.getMeta().getType()){
+    public DataEntryBuilder valueData(Object data) {
+        switch (this.value.getMeta().getType()) {
             case STRUCT:
                 List<Field> fields = null;
-                if(data instanceof Struct){
+                if (data instanceof Struct) {
                     fields = ((Struct)data).getFields();
-                } else if(data instanceof MetaAndData){
+                } else if (data instanceof MetaAndData) {
                     fields = ((MetaAndData)data).getMeta().getFields();
-                } else{
+                } else {
                     MetaAndData strData = MetaAndData.getMetaDataFromString(data.toString());
                     fields = strData.getMeta().getFields();
                 }
-                if(fields != null){
+                if (fields != null) {
                     for (int i = 0; i < fields.size(); i++) {
                         String fieldName = fields.get(i).name();
                         valueData(fieldName, ((Struct)data).getObject(fieldName));
@@ -290,41 +289,39 @@ public class DataEntryBuilder {
         return this;
     }
 
-
     // map
 
-    public DataEntryBuilder keyData(Object key, Object value){
+    public DataEntryBuilder keyData(Object key, Object value) {
         this.key.putData(key, value);
         return this;
     }
 
-    public DataEntryBuilder keyData(Map map){
+    public DataEntryBuilder keyData(Map map) {
         this.key.putData(map);
         return this;
     }
 
-    public DataEntryBuilder valueData(Object key, Object value){
+    public DataEntryBuilder valueData(Object key, Object value) {
         this.value.putData(key, value);
         return this;
     }
 
-    public DataEntryBuilder valueData(Map map){
+    public DataEntryBuilder valueData(Map map) {
         this.value.putData(map);
         return this;
     }
 
     // array
 
-    public DataEntryBuilder keyData(List elements){
+    public DataEntryBuilder keyData(List elements) {
         this.key.putData(elements);
         return this;
     }
 
-    public DataEntryBuilder valueData(List elements){
+    public DataEntryBuilder valueData(List elements) {
         this.value.putData(elements);
         return this;
     }
-
 
     // struct
 
@@ -343,7 +340,6 @@ public class DataEntryBuilder {
         return this;
     }
 
-
     public DataEntryBuilder valueData(String fieldName, Object data) {
         this.value.putData(fieldName, data);
         return this;
@@ -359,18 +355,15 @@ public class DataEntryBuilder {
         return this;
     }
 
-
-
     public SourceDataEntry buildSourceDataEntry(ByteBuffer sourcePartition, ByteBuffer sourcePosition) {
 
-        return new SourceDataEntry(sourcePartition, sourcePosition, timestamp, queueName, queueId, entryType, key,
+        return new SourceDataEntry(sourcePartition, sourcePosition, timestamp, queueName, shardingKey, entryType, key,
             value, headers);
     }
 
     public SinkDataEntry buildSinkDataEntry(Long queueOffset) {
 
-        return new SinkDataEntry(queueOffset, timestamp, queueName, queueId, entryType, key, value, headers);
+        return new SinkDataEntry(queueOffset, timestamp, queueName, shardingKey, entryType, key, value, headers);
     }
-
 
 }

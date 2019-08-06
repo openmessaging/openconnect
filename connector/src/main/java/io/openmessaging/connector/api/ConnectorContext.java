@@ -14,17 +14,26 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-
-package io.openmessaging.connector.api.source;
-
-import io.openmessaging.connector.api.Connector;
+package io.openmessaging.connector.api;
 
 /**
- * SourceConnectors implement the connector interface to pull data from another system and send it specific message
- * queue.
+ * ConnectorContext allows Connectors to proactively interact with the Connect runtime.
  *
  * @version OMS 0.1.0
  * @since OMS 0.1.0
  */
-public abstract class SourceConnector extends Connector {
+public interface ConnectorContext {
+    /**
+     * Requests that the runtime reconfigure the Tasks for this source. This should be used to indicate to the runtime
+     * that something about the input/output has changed and the running Tasks will need to be modified.
+     */
+    void requestTaskReconfiguration();
+
+    /**
+     * Raise an unrecoverable exception to the Connect framework. This will cause the status of the connector to
+     * transition to FAILED.
+     *
+     * @param e Exception to be raised.
+     */
+    void raiseError(Exception e);
 }

@@ -97,7 +97,7 @@ public class SinkDataEntryTest {
 
         structDataEntry
             .queue("last_queue")
-            .queueId(1)
+            .shardingKey("shardingkey")
             .timestamp(System.currentTimeMillis())
             .entryType(EntryType.UPDATE)
             .keyData("schema_data_lalala")

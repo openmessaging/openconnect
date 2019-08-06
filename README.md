@@ -43,7 +43,7 @@ as well as the key/value operations for offset management.
 <br>Returns the Task implementation for this Connector.
 
 `List<KeyValue> taskConfigs()`
-<br>Returns a set of configurations for Tasks based on the current configuration.
+<br>Returns a set of configurations for Task based on the current configuration.
 
 ## Task
 

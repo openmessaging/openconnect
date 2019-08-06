@@ -26,44 +26,57 @@ import java.util.List;
  * @version OMS 0.1.0
  * @since OMS 0.1.0
  */
-public interface Connector {
+public abstract class Connector {
+
+    protected ConnectorContext context;
+
+    /**
+     * Initialize this connector
+     *
+     * @param ctx ontext object used to interact with the Connect runtime
+     */
+    public void initialize(ConnectorContext ctx) {
+        context = ctx;
+    }
 
     /**
      * Should invoke before start the connector.
      *
      * @return error message
      */
-    String verifyAndSetConfig(KeyValue config);
+    public abstract String verifyAndSetConfig(KeyValue config);
 
     /**
      * Start the connector with the given config.
      */
-    void start();
+    public abstract void start();
 
     /**
      * Stop the connector.
      */
-    void stop();
+    public abstract void stop();
 
     /**
      * Pause the connector.
      */
-    void pause();
+    public abstract void pause();
 
     /**
      * Resume the connector.
      */
-    void resume();
+    public abstract void resume();
 
     /**
      * Returns the Task implementation for this Connector.
+     *
      * @return the implementation of the class
      */
-    Class<? extends Task> taskClass();
+    public abstract Class<? extends Task> taskClass();
 
     /**
      * Returns a set of configurations for Tasks based on the current configuration.
+     *
      * @return the configurations of the class
      */
-    List<KeyValue> taskConfigs();
+    public abstract List<KeyValue> taskConfigs();
 }

@@ -39,44 +39,40 @@ public class SourceDataEntry extends DataEntry {
      */
     private ByteBuffer sourcePosition;
 
-
     public SourceDataEntry(ByteBuffer sourcePartition,
         ByteBuffer sourcePosition,
         Long timestamp,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData key,
         MetaAndData value,
         Headers headers) {
-        super(timestamp, queueName, queueId, entryType, key, value, headers);
+        super(timestamp, queueName, shardingKey, entryType, key, value, headers);
         this.sourcePartition = sourcePartition;
         this.sourcePosition = sourcePosition;
     }
 
-
-
     public SourceDataEntry(ByteBuffer sourcePartition,
         ByteBuffer sourcePosition,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData value,
         Headers headers) {
         this(sourcePartition, sourcePosition, null,
-            queueName, queueId, entryType,
+            queueName, shardingKey, entryType,
             null, value, headers);
     }
-
 
     public SourceDataEntry(ByteBuffer sourcePartition,
         ByteBuffer sourcePosition,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData value) {
         this(sourcePartition, sourcePosition, null,
-            queueName, queueId, entryType,
+            queueName, shardingKey, entryType,
             null, value, null);
     }
 
@@ -104,12 +100,12 @@ public class SourceDataEntry extends DataEntry {
     public SourceDataEntry(ByteBuffer sourcePartition,
         ByteBuffer sourcePosition,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData key,
         MetaAndData value) {
         this(sourcePartition, sourcePosition, null,
-            queueName, queueId, entryType,
+            queueName, shardingKey, entryType,
             key, value, null);
     }
 
@@ -117,44 +113,37 @@ public class SourceDataEntry extends DataEntry {
         ByteBuffer sourcePosition,
         Long timestamp,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData key,
         MetaAndData value) {
         this(sourcePartition, sourcePosition, timestamp,
-            queueName, queueId, entryType,
+            queueName, shardingKey, entryType,
             key, value, null);
     }
-
-
-
 
     public SourceDataEntry newDataEntry(
         Long timestamp,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData key,
         MetaAndData value) {
         return new SourceDataEntry(this.sourcePartition, this.sourcePosition,
-            timestamp, queueName, queueId, entryType, key, value, getHeaders().duplicate());
+            timestamp, queueName, shardingKey, entryType, key, value, getHeaders().duplicate());
     }
 
     public SourceDataEntry newDataEntry(
         Long timestamp,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData key,
         MetaAndData value,
         Headers headers) {
         return new SourceDataEntry(this.sourcePartition, this.sourcePosition,
-            timestamp, queueName, queueId, entryType, key, value, headers);
+            timestamp, queueName, shardingKey, entryType, key, value, headers);
     }
-
-
-
-
 
     public ByteBuffer getSourcePartition() {
         return sourcePartition;
@@ -172,7 +161,6 @@ public class SourceDataEntry extends DataEntry {
         this.sourcePosition = sourcePosition;
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -185,7 +173,7 @@ public class SourceDataEntry extends DataEntry {
             return false;
         }
 
-        SourceDataEntry that = (SourceDataEntry) o;
+        SourceDataEntry that = (SourceDataEntry)o;
 
         return Objects.equals(this.sourcePartition, that.sourcePartition) &&
             Objects.equals(this.sourcePosition, that.sourcePosition);

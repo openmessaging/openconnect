@@ -39,9 +39,9 @@ public abstract class DataEntry {
      */
     private String queueName;
     /**
-     * The id of queue.
+     * Used for shard to related queue/partition.
      */
-    private Integer queueId;
+    private String shardingKey;
     /**
      * {@link EntryType} of the {@link DataEntry}
      */
@@ -59,31 +59,30 @@ public abstract class DataEntry {
      */
     private Headers headers;
 
-
     public DataEntry(Long timestamp,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData key,
         MetaAndData value) {
-        this(timestamp, queueName, queueId, entryType, key, value, new DataHeaders());
+        this(timestamp, queueName, shardingKey, entryType, key, value, new DataHeaders());
     }
 
     public DataEntry(Long timestamp,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData key,
         MetaAndData value,
         Iterable<Header> headers) {
         this.timestamp = timestamp;
         this.queueName = queueName;
-        this.queueId = queueId;
+        this.shardingKey = shardingKey;
         this.entryType = entryType;
         this.key = key;
         this.value = value;
         if (headers instanceof DataHeaders) {
-            this.headers = (DataHeaders) headers;
+            this.headers = (DataHeaders)headers;
         } else {
             this.headers = new DataHeaders(headers);
         }
@@ -137,20 +136,19 @@ public abstract class DataEntry {
         this.headers = headers;
     }
 
-    public int getQueueId() {
-        return queueId;
+    public String getShardingKey() {
+        return shardingKey;
     }
 
-    public void setQueueId(int queueId) {
-        this.queueId = queueId;
+    public void setShardingKey(String shardingKey) {
+        this.shardingKey = shardingKey;
     }
-
 
     @Override
     public String toString() {
         return "DataEntry{" +
             "queueName='" + this.queueName + '\'' +
-            ", queueId='" + this.queueId +
+            ", shardingKey='" + this.shardingKey +
             ", entryType='" + this.entryType + '\'' +
             ", key='" + this.key + '\'' +
             ", value='" + this.value + '\'' +
@@ -168,9 +166,9 @@ public abstract class DataEntry {
             return false;
         }
 
-        DataEntry that = (DataEntry) o;
+        DataEntry that = (DataEntry)o;
 
-        return Objects.equals(this.queueId, that.queueId)
+        return Objects.equals(this.shardingKey, that.shardingKey)
             && Objects.equals(this.queueName, that.queueName)
             && Objects.equals(this.entryType, that.entryType)
             && Objects.equals(this.key, that.key)
@@ -182,7 +180,7 @@ public abstract class DataEntry {
     @Override
     public int hashCode() {
         int result = this.queueName != null ? this.queueName.hashCode() : 0;
-        result = 31 * result + (this.queueId != null ? this.queueId.hashCode() : 0);
+        result = 31 * result + (this.shardingKey != null ? this.shardingKey.hashCode() : 0);
         result = 31 * result + (this.entryType != null ? entryType.hashCode() : 0);
         result = 31 * result + (this.key != null ? this.key.hashCode() : 0);
         result = 31 * result + (this.value != null ? this.value.hashCode() : 0);

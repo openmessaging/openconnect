@@ -31,59 +31,58 @@ public class SinkDataEntry extends DataEntry {
      */
     private Long queueOffset;
 
-
     public SinkDataEntry(Long queueOffset,
         Long timestamp,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData key,
         MetaAndData value,
         Headers headers) {
-        super(timestamp, queueName, queueId, entryType, key, value, headers);
+        super(timestamp, queueName, shardingKey, entryType, key, value, headers);
         this.queueOffset = queueOffset;
     }
 
     public SinkDataEntry(Long queueOffset,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData key,
         MetaAndData value,
         Headers headers) {
-        this(queueOffset, null, queueName, queueId, entryType, key, value, headers);
+        this(queueOffset, null, queueName, shardingKey, entryType, key, value, headers);
     }
 
     public SinkDataEntry(Long queueOffset,
         Long timestamp,
         String queueName,
-        Integer queueId,
+        String shardingKey,
         EntryType entryType,
         MetaAndData key,
         MetaAndData value) {
-        this(queueOffset, timestamp, queueName, queueId, entryType, key, value, null);
-    }
-
-
-    public SinkDataEntry newRecord(Long queueOffset,
-        Long timestamp,
-        String queueName,
-        Integer queueId,
-        EntryType entryType,
-        MetaAndData key,
-        MetaAndData value) {
-        return new SinkDataEntry(queueOffset, timestamp, queueName, queueId, entryType, key, value, getHeaders().duplicate());
+        this(queueOffset, timestamp, queueName, shardingKey, entryType, key, value, null);
     }
 
     public SinkDataEntry newRecord(Long queueOffset,
         Long timestamp,
         String queueName,
-        Integer queueId,
+        String shardingKey,
+        EntryType entryType,
+        MetaAndData key,
+        MetaAndData value) {
+        return new SinkDataEntry(queueOffset, timestamp, queueName, shardingKey, entryType, key, value,
+            getHeaders().duplicate());
+    }
+
+    public SinkDataEntry newRecord(Long queueOffset,
+        Long timestamp,
+        String queueName,
+        String shardingKey,
         EntryType entryType,
         MetaAndData key,
         MetaAndData value,
         Headers headers) {
-        return new SinkDataEntry(queueOffset, timestamp, queueName, queueId, entryType, key, value, headers);
+        return new SinkDataEntry(queueOffset, timestamp, queueName, shardingKey, entryType, key, value, headers);
     }
 
     @Override
@@ -98,7 +97,7 @@ public class SinkDataEntry extends DataEntry {
             return false;
         }
 
-        SinkDataEntry that = (SinkDataEntry) o;
+        SinkDataEntry that = (SinkDataEntry)o;
 
         return queueOffset.equals(that.queueOffset);
     }

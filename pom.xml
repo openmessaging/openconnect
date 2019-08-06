@@ -25,7 +25,7 @@
 
     <groupId>io.openmessaging</groupId>
     <artifactId>openmessaging-connect</artifactId>
-    <version>0.1.0-beta</version>
+    <version>0.1.1-beta-SNAPSHOT</version>
     <name>OpenMessaging Connect</name>
     <packaging>pom</packaging>
 
@@ -48,9 +48,9 @@
     </licenses>
 
     <scm>
-        <url>https://github.com/openmessaging/openmessaging-connector</url>
-        <connection>scm:git:git@github.com:openmessaging/openmessaging-connector.git</connection>
-        <developerConnection>scm:git:git@github.com:openmessaging/openmessaging-connector.git</developerConnection>
+        <url>git@github.com:openmessaging/openmessaging-connect.git</url>
+        <connection>scm:git:git@github.com:openmessaging/openmessaging-connect.git</connection>
+        <developerConnection>scm:git:git@github.com:openmessaging/openmessaging-connect.git</developerConnection>
         <tag>HEAD</tag>
     </scm>
 
