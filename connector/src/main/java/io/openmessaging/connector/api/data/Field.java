@@ -17,6 +17,8 @@
 
 package io.openmessaging.connector.api.data;
 
+import java.util.Objects;
+
 /**
  * Filed of the schema.
  *
@@ -69,5 +71,28 @@ public class Field {
 
     public void setType(FieldType type) {
         this.type = type;
+    }
+
+    @Override public String toString() {
+        return "Field{" +
+            "index=" + index +
+            ", name='" + name + '\'' +
+            ", type=" + type +
+            '}';
+    }
+
+    @Override public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof Field))
+            return false;
+        Field field = (Field) o;
+        return index == field.index &&
+            Objects.equals(name, field.name) &&
+            type == field.type;
+    }
+
+    @Override public int hashCode() {
+        return Objects.hash(index, name, type);
     }
 }

@@ -43,6 +43,11 @@ public class DataEntryBuilder {
     private String queueName;
 
     /**
+     * Used for set target partition/queue of a related queue.
+     */
+    private String shardingKey;
+
+    /**
      * Schema of the data entry.
      */
     private Schema schema;
@@ -72,6 +77,11 @@ public class DataEntryBuilder {
         return this;
     }
 
+    public DataEntryBuilder shardingKey(String shardingKey) {
+        this.shardingKey = shardingKey;
+        return this;
+    }
+
     public DataEntryBuilder putFiled(String fieldName, Object value) {
 
         Field field = lookupField(fieldName);
@@ -81,12 +91,12 @@ public class DataEntryBuilder {
 
     public SourceDataEntry buildSourceDataEntry(ByteBuffer sourcePartition, ByteBuffer sourcePosition) {
 
-        return new SourceDataEntry(sourcePartition, sourcePosition, timestamp, entryType, queueName, schema, payload);
+        return new SourceDataEntry(sourcePartition, sourcePosition, timestamp, entryType, queueName, schema, shardingKey, payload);
     }
 
     public SinkDataEntry buildSinkDataEntry(Long queueOffset) {
 
-        return new SinkDataEntry(queueOffset, timestamp, entryType, queueName, schema, payload);
+        return new SinkDataEntry(queueOffset, timestamp, entryType, queueName, schema, shardingKey, payload);
     }
 
     private Field lookupField(String fieldName) {
