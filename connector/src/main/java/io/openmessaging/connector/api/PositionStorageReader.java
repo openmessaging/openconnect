@@ -30,7 +30,7 @@ import java.util.Map;
 public interface PositionStorageReader {
 
     /**
-     * Get the position for the specified partition.
+     * Get the position for the specified queueId.
      *
      * @param partition
      * @return

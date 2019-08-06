@@ -17,8 +17,10 @@
 
 package io.openmessaging.connector.api.data;
 
+import java.util.Objects;
+
 /**
- * Filed of the schema.
+ * Filed of the meta.
  *
  * @version OMS 0.1.0
  * @since OMS 0.1.0
@@ -26,48 +28,63 @@ package io.openmessaging.connector.api.data;
 public class Field {
 
     /**
-     * Index of a field. The index of fields in a schema should be unique and continuous。
+     * Index of a field. The index of fields in a meta should be unique and continuous。
      */
-    private int index;
+    private final int index;
 
     /**
-     * The name of a file. Should be unique in a shcema.
+     * The name of a field. Should be unique in a meta.
      */
-    private String name;
+    private final String name;
 
     /**
-     * The type of the file.
+     * The type of the field.
      */
-    private FieldType type;
+    private final Meta meta;
 
-    public Field(int index, String name, FieldType type) {
-
+    public Field(int index, String name, Meta meta) {
         this.index = index;
         this.name = name;
-        this.type = type;
+        this.meta = meta;
     }
 
-    public int getIndex() {
+    public int index() {
         return index;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
-    }
-
-    public String getName() {
+    public String name() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Meta meta() {
+        return meta;
     }
 
-    public FieldType getType() {
-        return type;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        Field field = (Field) o;
+        return Objects.equals(index, field.index) &&
+            Objects.equals(name, field.name) &&
+            Objects.equals(meta, field.meta);
     }
 
-    public void setType(FieldType type) {
-        this.type = type;
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, index, meta);
+    }
+
+    @Override
+    public String toString() {
+        return "Field{" +
+            "name=" + name +
+            ", index=" + index +
+            ", meta=" + meta +
+            "}";
     }
 }

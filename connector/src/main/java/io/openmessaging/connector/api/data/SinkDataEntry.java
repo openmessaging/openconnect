@@ -17,6 +17,8 @@
 
 package io.openmessaging.connector.api.data;
 
+import io.openmessaging.connector.api.header.Headers;
+
 /**
  * SinkDataEntry is read from message queue and includes the queueOffset of the data in message queue.
  *
@@ -24,21 +26,96 @@ package io.openmessaging.connector.api.data;
  * @since OMS 0.1.0
  */
 public class SinkDataEntry extends DataEntry {
-
-    public SinkDataEntry(Long queueOffset,
-        Long timestamp,
-        EntryType entryType,
-        String queueName,
-        Schema schema,
-        Object[] payload) {
-        super(timestamp, entryType, queueName, schema, payload);
-        this.queueOffset = queueOffset;
-    }
-
     /**
      * Offset in the message queue.
      */
     private Long queueOffset;
+
+
+    public SinkDataEntry(Long queueOffset,
+        Long timestamp,
+        String queueName,
+        Integer queueId,
+        EntryType entryType,
+        MetaAndData key,
+        MetaAndData value,
+        Headers headers) {
+        super(timestamp, queueName, queueId, entryType, key, value, headers);
+        this.queueOffset = queueOffset;
+    }
+
+    public SinkDataEntry(Long queueOffset,
+        String queueName,
+        Integer queueId,
+        EntryType entryType,
+        MetaAndData key,
+        MetaAndData value,
+        Headers headers) {
+        this(queueOffset, null, queueName, queueId, entryType, key, value, headers);
+    }
+
+    public SinkDataEntry(Long queueOffset,
+        Long timestamp,
+        String queueName,
+        Integer queueId,
+        EntryType entryType,
+        MetaAndData key,
+        MetaAndData value) {
+        this(queueOffset, timestamp, queueName, queueId, entryType, key, value, null);
+    }
+
+
+    public SinkDataEntry newRecord(Long queueOffset,
+        Long timestamp,
+        String queueName,
+        Integer queueId,
+        EntryType entryType,
+        MetaAndData key,
+        MetaAndData value) {
+        return new SinkDataEntry(queueOffset, timestamp, queueName, queueId, entryType, key, value, getHeaders().duplicate());
+    }
+
+    public SinkDataEntry newRecord(Long queueOffset,
+        Long timestamp,
+        String queueName,
+        Integer queueId,
+        EntryType entryType,
+        MetaAndData key,
+        MetaAndData value,
+        Headers headers) {
+        return new SinkDataEntry(queueOffset, timestamp, queueName, queueId, entryType, key, value, headers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        SinkDataEntry that = (SinkDataEntry) o;
+
+        return queueOffset.equals(that.queueOffset);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + Long.hashCode(queueOffset);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SinkDataEntry{" +
+            "queueOffset=" + queueOffset +
+            "} " + super.toString();
+    }
 
     public Long getQueueOffset() {
         return queueOffset;
