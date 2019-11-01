@@ -18,6 +18,7 @@
 package io.openmessaging.connector.api.source;
 
 import io.openmessaging.connector.api.Task;
+import io.openmessaging.connector.api.data.SinkDataEntry;
 import io.openmessaging.connector.api.data.SourceDataEntry;
 import java.util.Collection;
 
@@ -50,4 +51,6 @@ public abstract class SourceTask implements Task {
      * function.
      */
     public void commit() {}
+
+    public void commitRecord(SourceDataEntry sourceDataEntry, SinkDataEntry sinkDataEntry) {};
 }
