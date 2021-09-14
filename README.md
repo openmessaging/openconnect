@@ -1,4 +1,4 @@
-# OpenMessaging Connect
+# OpenConnect
 
 ## Introduction
 OpenMessaging Connect is a standard to connect between data sources and data destinations. Users could easily create connector instances with configurations via REST API.
