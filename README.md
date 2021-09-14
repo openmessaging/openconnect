@@ -1,7 +1,7 @@
 # OpenConnect
 
 ## Introduction
-OpenMessaging Connect is a standard to connect between data sources and data destinations. Users could easily create connector instances with configurations via REST API.
+OpenConnect is a standard to connect between data sources and data destinations. Users could easily create connector instances with configurations via REST API.
 
 There are two types of connectors: source connector and sink connector. A source connector is used for pulling data from a data source (e.g. RDBMS).
 The data is sent to corresponding message queue and expected to be consumed by one or many sink connectors.
