@@ -20,6 +20,7 @@ package io.openmessaging.connector.api.sink;
 import io.openmessaging.connector.api.Task;
 import io.openmessaging.connector.api.common.QueueMetaData;
 import io.openmessaging.connector.api.data.SinkDataEntry;
+
 import java.util.Collection;
 import java.util.Map;
 

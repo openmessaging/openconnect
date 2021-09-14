@@ -17,7 +17,7 @@
 
 package io.openmessaging.connector.api.data;
 
-import java.util.Objects;
+import io.openmessaging.connector.api.header.Headers;
 
 /**
  * SinkDataEntry is read from message queue and includes the queueOffset of the data in message queue.
@@ -26,31 +26,95 @@ import java.util.Objects;
  * @since OMS 0.1.0
  */
 public class SinkDataEntry extends DataEntry {
-
-    public SinkDataEntry(Long queueOffset,
-        Long timestamp,
-        EntryType entryType,
-        String queueName,
-        Schema schema,
-        Object[] payload) {
-        this(queueOffset, timestamp, entryType, queueName, schema, null, payload);
-    }
-
-    public SinkDataEntry(Long queueOffset,
-        Long timestamp,
-        EntryType entryType,
-        String queueName,
-        Schema schema,
-        String shardingKey,
-        Object[] payload) {
-        super(timestamp, entryType, queueName, schema, shardingKey, payload);
-        this.queueOffset = queueOffset;
-    }
-
     /**
      * Offset in the message queue.
      */
     private Long queueOffset;
+
+    public SinkDataEntry(Long queueOffset,
+        Long timestamp,
+        String queueName,
+        String shardingKey,
+        EntryType entryType,
+        MetaAndData key,
+        MetaAndData value,
+        Headers headers) {
+        super(timestamp, queueName, shardingKey, entryType, key, value, headers);
+        this.queueOffset = queueOffset;
+    }
+
+    public SinkDataEntry(Long queueOffset,
+        String queueName,
+        String shardingKey,
+        EntryType entryType,
+        MetaAndData key,
+        MetaAndData value,
+        Headers headers) {
+        this(queueOffset, null, queueName, shardingKey, entryType, key, value, headers);
+    }
+
+    public SinkDataEntry(Long queueOffset,
+        Long timestamp,
+        String queueName,
+        String shardingKey,
+        EntryType entryType,
+        MetaAndData key,
+        MetaAndData value) {
+        this(queueOffset, timestamp, queueName, shardingKey, entryType, key, value, null);
+    }
+
+    public SinkDataEntry newRecord(Long queueOffset,
+        Long timestamp,
+        String queueName,
+        String shardingKey,
+        EntryType entryType,
+        MetaAndData key,
+        MetaAndData value) {
+        return new SinkDataEntry(queueOffset, timestamp, queueName, shardingKey, entryType, key, value,
+            getHeaders().duplicate());
+    }
+
+    public SinkDataEntry newRecord(Long queueOffset,
+        Long timestamp,
+        String queueName,
+        String shardingKey,
+        EntryType entryType,
+        MetaAndData key,
+        MetaAndData value,
+        Headers headers) {
+        return new SinkDataEntry(queueOffset, timestamp, queueName, shardingKey, entryType, key, value, headers);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        if (!super.equals(o)) {
+            return false;
+        }
+
+        SinkDataEntry that = (SinkDataEntry)o;
+
+        return queueOffset.equals(that.queueOffset);
+    }
+
+    @Override
+    public int hashCode() {
+        int result = super.hashCode();
+        result = 31 * result + Long.hashCode(queueOffset);
+        return result;
+    }
+
+    @Override
+    public String toString() {
+        return "SinkDataEntry{" +
+            "queueOffset=" + queueOffset +
+            "} " + super.toString();
+    }
 
     public Long getQueueOffset() {
         return queueOffset;
@@ -58,26 +122,5 @@ public class SinkDataEntry extends DataEntry {
 
     public void setQueueOffset(Long queueOffset) {
         this.queueOffset = queueOffset;
-    }
-
-    @Override public String toString() {
-        return "SinkDataEntry{" +
-            "queueOffset=" + queueOffset +
-            "} " + super.toString();
-    }
-
-    @Override public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof SinkDataEntry))
-            return false;
-        if (!super.equals(o))
-            return false;
-        SinkDataEntry entry = (SinkDataEntry) o;
-        return Objects.equals(queueOffset, entry.queueOffset);
-    }
-
-    @Override public int hashCode() {
-        return Objects.hash(super.hashCode(), queueOffset);
     }
 }

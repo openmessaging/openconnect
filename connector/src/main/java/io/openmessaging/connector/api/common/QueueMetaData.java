@@ -46,24 +46,25 @@ public class QueueMetaData {
         this.shardingKey = shardingKey;
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "QueueMetaData{" +
             "queueName='" + queueName + '\'' +
             ", shardingKey='" + shardingKey + '\'' +
             '}';
     }
 
-    @Override public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof QueueMetaData))
-            return false;
-        QueueMetaData data = (QueueMetaData) o;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) { return true; }
+        if (!(o instanceof QueueMetaData)) { return false; }
+        QueueMetaData data = (QueueMetaData)o;
         return Objects.equals(queueName, data.queueName) &&
             Objects.equals(shardingKey, data.shardingKey);
     }
 
-    @Override public int hashCode() {
+    @Override
+    public int hashCode() {
         return Objects.hash(queueName, shardingKey);
     }
 }
