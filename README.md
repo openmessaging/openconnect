@@ -15,6 +15,7 @@ However, these frameworks are lack of interoperability, which means a connector 
 RabbitMQ without modification and vice versa.
 
 ![dataflow](flow.png "dataflow")
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fopenmessaging%2Fopenmessaging-connect.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fopenmessaging%2Fopenmessaging-connect?ref=badge_shield)
 
 A connector follows OpenMessaging Connect could run with any message queues which support OpenMessaging API.
 OpenMessaging Connect provides a standalone runtime which uses OpenMessaging API for sending and consuming message,
@@ -70,3 +71,7 @@ as well as the key/value operations for offset management.
 <br>Put the data entries to the sink.
 
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fopenmessaging%2Fopenmessaging-connect.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fopenmessaging%2Fopenmessaging-connect?ref=badge_large)
