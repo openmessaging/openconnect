@@ -8,21 +8,19 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
- */
-package io.openmessaging.connector.api;
-
-/**
- * ConnectorContext allows Connectors to proactively interact with the Connect runtime.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  *
- * @version OMS 0.1.0
- * @since OMS 0.1.0
  */
-public interface ConnectorContext {
+
+package io.openmessaging.connector.api.component.connector;
+
+import io.openmessaging.connector.api.component.ComponentContext;
+
+public interface ConnectorContext extends ComponentContext {
     /**
      * Requests that the runtime reconfigure the Tasks for this source. This should be used to indicate to the runtime
      * that something about the input/output has changed and the running Tasks will need to be modified.

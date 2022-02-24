@@ -16,29 +16,31 @@
  *
  */
 
-package io.openmessaging.connector.api.data;
+package io.openmessaging.connector.api.storage;
 
-/**
- * A converter used to convert between {@link ConnectRecord} and byte[].
- *
- * @version OMS 0.1.0
- * @since OMS 0.1.0
- */
-public interface Converter<T> {
+import io.openmessaging.connector.api.data.RecordOffset;
+import io.openmessaging.connector.api.data.RecordPartition;
+import java.util.Collection;
+import java.util.Map;
+
+public interface OffsetStorageReader {
+    /**
+     * Get the offset for the specified partition.
+     *
+     * @param partition
+     *
+     * @return
+     */
+    <T> RecordOffset readOffset(RecordPartition partition);
+
 
     /**
-     * Method to serialize the {@link ConnectRecord}.
+     * Get the offset for the specified partitions.
      *
-     * @param object this object needs to be converted to byte[].
-     * @return converted value.
+     * @param partitions
+     *
+     * @return
      */
-    byte[] objectToByte(T object);
+    <T> Map<RecordPartition, RecordOffset> readOffsets(Collection<RecordPartition> partitions);
 
-    /**
-     * Method to deserialize the {@link ConnectRecord}.
-     *
-     * @param bytes this bytes needs to be converted to the required class.
-     * @return converted value.
-     */
-    T byteToObject(byte[] bytes);
 }

@@ -16,29 +16,17 @@
  *
  */
 
-package io.openmessaging.connector.api.data;
+package io.openmessaging.connector.api.component;
+
+import io.openmessaging.connector.api.data.ConnectRecord;
 
 /**
- * A converter used to convert between {@link ConnectRecord} and byte[].
+ * A Transform used to transform {@link ConnectRecord}.
  *
  * @version OMS 0.1.0
  * @since OMS 0.1.0
  */
-public interface Converter<T> {
+public interface Transform<R extends ConnectRecord> extends Component {
 
-    /**
-     * Method to serialize the {@link ConnectRecord}.
-     *
-     * @param object this object needs to be converted to byte[].
-     * @return converted value.
-     */
-    byte[] objectToByte(T object);
-
-    /**
-     * Method to deserialize the {@link ConnectRecord}.
-     *
-     * @param bytes this bytes needs to be converted to the required class.
-     * @return converted value.
-     */
-    T byteToObject(byte[] bytes);
+    R doTransform(R record);
 }

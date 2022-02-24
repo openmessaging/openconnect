@@ -16,29 +16,15 @@
  *
  */
 
-package io.openmessaging.connector.api.data;
+package io.openmessaging.connector.api.component.task.sink;
 
-/**
- * A converter used to convert between {@link ConnectRecord} and byte[].
- *
- * @version OMS 0.1.0
- * @since OMS 0.1.0
- */
-public interface Converter<T> {
+import io.openmessaging.connector.api.component.connector.Connector;
 
-    /**
-     * Method to serialize the {@link ConnectRecord}.
-     *
-     * @param object this object needs to be converted to byte[].
-     * @return converted value.
-     */
-    byte[] objectToByte(T object);
+public abstract class SinkConnector extends Connector {
 
-    /**
-     * Method to deserialize the {@link ConnectRecord}.
-     *
-     * @param bytes this bytes needs to be converted to the required class.
-     * @return converted value.
-     */
-    T byteToObject(byte[] bytes);
+    public static final String TARGET_PARTITION = "targetPartition";
+
+    public SinkConnector() {
+        super();
+    }
 }
