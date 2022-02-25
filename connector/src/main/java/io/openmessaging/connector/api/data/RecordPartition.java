@@ -26,7 +26,7 @@ public class RecordPartition {
     /**
      * if pull message from mq
      * key=topic,value=topicName
-     * key=brokerId,value=brokerId
+     * key=brokerName,value=brokerName
      * key=queueId,value=queueId
      */
     private final Map<String, ?> partition;

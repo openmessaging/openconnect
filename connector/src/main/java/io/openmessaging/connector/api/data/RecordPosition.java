@@ -24,9 +24,6 @@ public class RecordPosition {
 
     private final RecordPartition recordPartition;
 
-    /**
-     * key=queue,value=Offset
-     */
     private final RecordOffset recordOffset;
 
     public RecordPosition(RecordPartition recordPartition, RecordOffset recordOffset) {
