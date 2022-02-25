@@ -29,13 +29,6 @@ import java.util.Set;
 public class ConnectRecord {
 
     /**
-     * eg.
-     * if sink data from mq, targetPartition = topicName
-     * if source data to mq, targetPartition = topicName
-     */
-    private String targetPartition;
-
-    /**
      * Timestamp of the data entry.
      */
     private Long timestamp;
@@ -60,27 +53,18 @@ public class ConnectRecord {
      */
     private KeyValue extensions;
 
-    public ConnectRecord(String targetPartition, RecordPartition recordPartition, RecordOffset recordOffset,
+    public ConnectRecord(RecordPartition recordPartition, RecordOffset recordOffset,
         Long timestamp) {
-        this(targetPartition, recordPartition, recordOffset, timestamp, null, null);
+        this(recordPartition, recordOffset, timestamp, null, null);
     }
 
-    public ConnectRecord(String targetPartition, RecordPartition recordPartition, RecordOffset recordOffset,
+    public ConnectRecord(RecordPartition recordPartition, RecordOffset recordOffset,
         Long timestamp, Schema schema,
         Object data) {
-        this.targetPartition = targetPartition;
         this.position = new RecordPosition(recordPartition, recordOffset);
         this.schema = schema;
         this.timestamp = timestamp;
         this.data = data;
-    }
-
-    public String getTargetPartition() {
-        return targetPartition;
-    }
-
-    public void setTargetPartition(String targetPartition) {
-        this.targetPartition = targetPartition;
     }
 
     public Long getTimestamp() {
@@ -153,17 +137,16 @@ public class ConnectRecord {
         if (!(o instanceof ConnectRecord))
             return false;
         ConnectRecord that = (ConnectRecord) o;
-        return Objects.equals(targetPartition, that.targetPartition) && Objects.equals(timestamp, that.timestamp) && Objects.equals(schema, that.schema) && Objects.equals(data, that.data) && Objects.equals(position, that.position) && Objects.equals(extensions, that.extensions);
+        return Objects.equals(timestamp, that.timestamp) && Objects.equals(schema, that.schema) && Objects.equals(data, that.data) && Objects.equals(position, that.position) && Objects.equals(extensions, that.extensions);
     }
 
     @Override public int hashCode() {
-        return Objects.hash(targetPartition, timestamp, schema, data, position, extensions);
+        return Objects.hash(timestamp, schema, data, position, extensions);
     }
 
     @Override public String toString() {
         return "ConnectRecord{" +
-            "targetPartition='" + targetPartition + '\'' +
-            ", timestamp=" + timestamp +
+            "timestamp=" + timestamp +
             ", schema=" + schema +
             ", data=" + data +
             ", position=" + position +

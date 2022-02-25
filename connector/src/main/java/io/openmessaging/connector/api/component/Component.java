@@ -20,7 +20,7 @@ package io.openmessaging.connector.api.component;
 
 import io.openmessaging.KeyValue;
 
-public interface Component {
+public interface Component<R extends ComponentContext>  {
 
     /**
      * Should invoke before start the connector.
@@ -37,7 +37,7 @@ public interface Component {
     /**
      * Start the component
      */
-    void start(ComponentContext componentContext);
+    void start(R componentContext);
 
     /**
      * Stop the component.

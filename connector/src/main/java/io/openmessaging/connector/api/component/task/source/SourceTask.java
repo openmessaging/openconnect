@@ -22,9 +22,13 @@ import io.openmessaging.connector.api.component.task.Task;
 import io.openmessaging.connector.api.data.ConnectRecord;
 import java.util.List;
 
-public abstract class SourceTask implements Task {
+public abstract class SourceTask<R extends SourceTaskContext> implements Task<R> {
 
-    protected SourceTaskContext context;
+    protected R sourceTaskContext;
+
+    @Override public void start(R sourceTaskContext) {
+        this.sourceTaskContext = sourceTaskContext;
+    }
 
     /**
      * Poll this source task for new records.
@@ -63,7 +67,7 @@ public abstract class SourceTask implements Task {
      * @return
      */
     public SourceTaskContext getContext() {
-        return context;
+        return sourceTaskContext;
     }
 
 }

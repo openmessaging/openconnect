@@ -19,8 +19,9 @@
 package io.openmessaging.connector.api.component.task;
 
 import io.openmessaging.connector.api.component.Component;
+import io.openmessaging.connector.api.component.ComponentContext;
 
-public interface Task extends Component {
+public interface Task<R extends ComponentContext> extends Component<R> {
 
     /**
      * Pause the task.

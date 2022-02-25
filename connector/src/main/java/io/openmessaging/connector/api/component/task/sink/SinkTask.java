@@ -26,9 +26,13 @@ import io.openmessaging.connector.api.errors.ConnectException;
 import java.util.List;
 import java.util.Map;
 
-public abstract class SinkTask implements Task {
+public abstract class SinkTask<R extends SinkTaskContext> implements Task<R> {
 
-    protected SinkTaskContext sinkTaskContext;
+    protected R sinkTaskContext;
+
+    @Override public void start(R sinkTaskContext) {
+        this.sinkTaskContext = sinkTaskContext;
+    }
 
     /**
      * Put the records to the sink
