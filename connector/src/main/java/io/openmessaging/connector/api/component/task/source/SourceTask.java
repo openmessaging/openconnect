@@ -22,11 +22,11 @@ import io.openmessaging.connector.api.component.task.Task;
 import io.openmessaging.connector.api.data.ConnectRecord;
 import java.util.List;
 
-public abstract class SourceTask<R extends SourceTaskContext> implements Task<R> {
+public abstract class SourceTask implements Task<SourceTaskContext> {
 
-    protected R sourceTaskContext;
+    protected SourceTaskContext sourceTaskContext;
 
-    @Override public void start(R sourceTaskContext) {
+    @Override public void start(SourceTaskContext sourceTaskContext) {
         this.sourceTaskContext = sourceTaskContext;
     }
 

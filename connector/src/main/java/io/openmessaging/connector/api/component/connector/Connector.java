@@ -23,11 +23,11 @@ import io.openmessaging.connector.api.component.Component;
 import io.openmessaging.connector.api.component.task.Task;
 import java.util.List;
 
-public abstract class Connector<R extends ConnectorContext> implements Component<R> {
+public abstract class Connector implements Component<ConnectorContext> {
 
-    protected R connectorContext;
+    protected ConnectorContext connectorContext;
 
-    @Override public void start(R connectorContext) {
+    @Override public void start(ConnectorContext connectorContext) {
         this.connectorContext = connectorContext;
     }
 

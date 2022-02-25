@@ -26,11 +26,11 @@ import io.openmessaging.connector.api.errors.ConnectException;
 import java.util.List;
 import java.util.Map;
 
-public abstract class SinkTask<R extends SinkTaskContext> implements Task<R> {
+public abstract class SinkTask implements Task<SinkTaskContext> {
 
-    protected R sinkTaskContext;
+    protected SinkTaskContext sinkTaskContext;
 
-    @Override public void start(R sinkTaskContext) {
+    @Override public void start(SinkTaskContext sinkTaskContext) {
         this.sinkTaskContext = sinkTaskContext;
     }
 

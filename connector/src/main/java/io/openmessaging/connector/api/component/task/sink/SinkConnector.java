@@ -22,8 +22,6 @@ import io.openmessaging.connector.api.component.connector.Connector;
 
 public abstract class SinkConnector extends Connector {
 
-    public static final String TARGET_PARTITION = "targetPartition";
-
     public SinkConnector() {
         super();
     }
