@@ -8,45 +8,41 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
 
 package io.openmessaging.connector.api.data;
 
 import java.util.List;
-import java.util.Objects;
 
 /**
  * Schema
- *
- * @version OMS 0.1.0
- * @since OMS 0.1.0
  */
 public class Schema {
 
     /**
-     * Data source information.
-     */
-    private String dataSource;
-    /**
      * Name of the schema.
      */
     private String name;
+
+    /**
+     * Type of the field
+     */
+    private FieldType fieldType;
     /**
      * Structure of the schema, contains a list of {@link Field}
      */
     private List<Field> fields;
 
-    public String getDataSource() {
-        return dataSource;
-    }
-
-    public void setDataSource(String dataSource) {
-        this.dataSource = dataSource;
+    public Schema(String name, FieldType fieldType, List<Field> fields) {
+        this.name = name;
+        this.fieldType = fieldType;
+        this.fields = fields;
     }
 
     public String getName() {
@@ -68,33 +64,31 @@ public class Schema {
     public Field getField(String fieldName) {
 
         for (Field field : fields) {
-            if (field.getName().equals(fieldName)) {
+            if (field.getName()
+                .equals(fieldName)) {
                 return field;
             }
         }
         return null;
     }
 
+    public void addField(Field field) {
+        this.fields.add(field);
+    }
+
+    public FieldType getFieldType() {
+        return fieldType;
+    }
+
+    public void setFieldType(FieldType fieldType) {
+        this.fieldType = fieldType;
+    }
+
     @Override public String toString() {
         return "Schema{" +
-            "dataSource='" + dataSource + '\'' +
-            ", name='" + name + '\'' +
+            "name='" + name + '\'' +
+            ", fieldType=" + fieldType +
             ", fields=" + fields +
             '}';
-    }
-
-    @Override public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof Schema))
-            return false;
-        Schema schema = (Schema) o;
-        return Objects.equals(dataSource, schema.dataSource) &&
-            Objects.equals(name, schema.name) &&
-            Objects.equals(fields, schema.fields);
-    }
-
-    @Override public int hashCode() {
-        return Objects.hash(dataSource, name, fields);
     }
 }

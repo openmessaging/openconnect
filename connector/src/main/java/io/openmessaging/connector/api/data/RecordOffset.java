@@ -18,59 +18,41 @@
 
 package io.openmessaging.connector.api.data;
 
-/**
- * Filed of the schema.
- */
-public class Field {
+import java.util.Map;
+import java.util.Objects;
 
-    private int index;
+public class RecordOffset {
 
     /**
-     * The name of a file. Should be unique in a shcema.
+     * if pull message from mq
+     * key=queueOffset,value=queueOffset value
      */
-    private String name;
+    private final Map<String, ?> offset;
 
-    /**
-     * The type of the file.
-     */
-    private Schema schema;
-
-    public Field(int index, String name, Schema schema) {
-
-        this.index = index;
-        this.name = name;
-        this.schema = schema;
+    public RecordOffset(Map<String, ?> offset) {
+        this.offset = offset;
     }
 
-    public int getIndex() {
-        return index;
+    public Map<String, ?> getOffset() {
+        return offset;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    @Override public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof RecordOffset))
+            return false;
+        RecordOffset offset1 = (RecordOffset) o;
+        return Objects.equals(offset, offset1.offset);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Schema getSchema() {
-        return schema;
-    }
-
-    public void setSchema(Schema schema) {
-        this.schema = schema;
+    @Override public int hashCode() {
+        return Objects.hash(offset);
     }
 
     @Override public String toString() {
-        return "Field{" +
-            "index=" + index +
-            ", name='" + name + '\'' +
-            ", schema=" + schema +
+        return "RecordOffset{" +
+            "offset=" + offset +
             '}';
     }
 }

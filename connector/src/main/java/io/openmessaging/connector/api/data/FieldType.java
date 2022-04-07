@@ -8,53 +8,57 @@
  *
  *     http://www.apache.org/licenses/LICENSE-2.0
  *
- *  Unless required by applicable law or agreed to in writing, software
- *  distributed under the License is distributed on an "AS IS" BASIS,
- *  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- *  See the License for the specific language governing permissions and
- *  limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
  */
 
 package io.openmessaging.connector.api.data;
 
 /**
  * Define the field type.
- *
- * @version OMS 0.1.0
- * @since OMS 0.1.0
  */
 public enum FieldType {
+    /** Short Integer */
+    INT8,
 
-  /** Integer */
-  INT32,
+    /** Integer */
+    INT32,
 
-  /** Long */
-  INT64,
+    /** Long */
+    INT64,
 
-  /** BigInteger */
-  BIG_INTEGER,
+    /** BigInteger */
+    BIG_INTEGER,
 
-  /** Float */
-  FLOAT32,
+    /** Float */
+    FLOAT32,
 
-  /** Double */
-  FLOAT64,
+    /** Double */
+    FLOAT64,
 
-  /** Boolean */
-  BOOLEAN,
+    /** Boolean */
+    BOOLEAN,
 
-  /** String */
-  STRING,
+    /** String */
+    STRING,
 
-  /** Byte */
-  BYTES,
+    /** Byte */
+    BYTES,
 
-  /** List */
-  ARRAY,
+    /** List */
+    ARRAY,
 
-  /** Map */
-  MAP,
+    /** Map */
+    MAP,
 
-  /** Date */
-  DATETIME;
+    /** Date */
+    DATETIME,
+    /**
+     * Structured
+     */
+    STRUCT
 }

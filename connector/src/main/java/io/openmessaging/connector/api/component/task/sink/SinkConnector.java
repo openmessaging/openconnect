@@ -13,31 +13,16 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
-package io.openmessaging.connector.api.exception;
-/**
- * @version OMS 0.1.0
- * @since OMS 0.1.0
- */
-public class DataConnectException extends ConnectException {
-    /**
-     * @see ConnectException#ConnectException(int, String)
-     */
-    public DataConnectException(int errorCode, String message) {
-        super(errorCode, message);
-    }
 
-    /**
-     * @see ConnectException#ConnectException(int, Throwable)
-     */
-    public DataConnectException(int errorCode, Throwable cause) {
-        super(errorCode, cause);
-    }
+package io.openmessaging.connector.api.component.task.sink;
 
-    /**
-     * @see ConnectException#ConnectException(int, String, Throwable)
-     */
-    public DataConnectException(int errorCode, String message, Throwable cause) {
-        super(errorCode, message, cause);
+import io.openmessaging.connector.api.component.connector.Connector;
+
+public abstract class SinkConnector extends Connector {
+
+    public SinkConnector() {
+        super();
     }
 }

@@ -18,59 +18,43 @@
 
 package io.openmessaging.connector.api.data;
 
-/**
- * Filed of the schema.
- */
-public class Field {
+import java.util.Map;
+import java.util.Objects;
 
-    private int index;
+public class RecordPartition {
 
     /**
-     * The name of a file. Should be unique in a shcema.
+     * if pull message from mq
+     * key=topic,value=topicName
+     * key=brokerName,value=brokerName
+     * key=queueId,value=queueId
      */
-    private String name;
+    private final Map<String, ?> partition;
 
-    /**
-     * The type of the file.
-     */
-    private Schema schema;
-
-    public Field(int index, String name, Schema schema) {
-
-        this.index = index;
-        this.name = name;
-        this.schema = schema;
+    public RecordPartition(Map<String, ?> partition) {
+        this.partition = partition;
     }
 
-    public int getIndex() {
-        return index;
+    public Map<String, ?> getPartition() {
+        return partition;
     }
 
-    public void setIndex(int index) {
-        this.index = index;
+    @Override public boolean equals(Object o) {
+        if (this == o)
+            return true;
+        if (!(o instanceof RecordPartition))
+            return false;
+        RecordPartition partition1 = (RecordPartition) o;
+        return Objects.equals(partition, partition1.partition);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Schema getSchema() {
-        return schema;
-    }
-
-    public void setSchema(Schema schema) {
-        this.schema = schema;
+    @Override public int hashCode() {
+        return Objects.hash(partition);
     }
 
     @Override public String toString() {
-        return "Field{" +
-            "index=" + index +
-            ", name='" + name + '\'' +
-            ", schema=" + schema +
+        return "RecordPartition{" +
+            "partition=" + partition +
             '}';
     }
 }
