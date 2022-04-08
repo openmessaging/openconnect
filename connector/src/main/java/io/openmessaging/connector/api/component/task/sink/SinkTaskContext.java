@@ -29,13 +29,16 @@ public interface SinkTaskContext extends ComponentContext {
 
     /**
      * Get the Connector Name
+     *
+     * @return connector name
      */
     String getConnectorName();
 
     /**
      * Get the Task Name of connector.
+     *
+     * @return task name
      */
-
     String getTaskName();
 
     /**

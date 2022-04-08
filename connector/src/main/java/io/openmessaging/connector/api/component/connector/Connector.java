@@ -53,7 +53,7 @@ public abstract class Connector implements Component<ConnectorContext> {
     /**
      * Return the current connector class
      *
-     * @return
+     * @return task implement class
      */
     public abstract Class<? extends Task> taskClass();
 

@@ -37,14 +37,14 @@ public abstract class SinkTask implements Task<SinkTaskContext> {
     /**
      * Put the records to the sink
      *
-     * @param sinkRecords
+     * @param sinkRecords sink records
      */
     public abstract void put(List<ConnectRecord> sinkRecords) throws ConnectException;
 
     /**
      * Flush the records to the sink
      *
-     * @param currentOffsets
+     * @param currentOffsets current offsets
      */
     public void flush(Map<RecordPartition, RecordOffset> currentOffsets) throws ConnectException {
 
@@ -53,7 +53,7 @@ public abstract class SinkTask implements Task<SinkTaskContext> {
     /**
      * Will be invoked prior to an offset commit.
      *
-     * @param currentOffsets
+     * @param currentOffsets current offsets
      * @return an empty map if Connect-managed offset commit is not desired, otherwise a map of offsets by
      * queue that are safe to commit.
      */

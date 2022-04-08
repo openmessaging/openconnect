@@ -116,6 +116,8 @@ public class SchemaBuilder {
     /**
      * Sets the schema name
      *
+     * @param name schema name
+     *
      * @return the current SchemaBuilder instance
      */
     public SchemaBuilder name(String name) {

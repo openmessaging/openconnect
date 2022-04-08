@@ -25,16 +25,22 @@ public interface SourceTaskContext extends ComponentContext {
 
     /**
      * Get the OffsetStorageReader for this SourceTask.
+     *
+     * @return offset storage reader
      */
     OffsetStorageReader offsetStorageReader();
 
     /**
      * Get the Connector Name
+     *
+     * @return connector name
      */
     String getConnectorName();
 
     /**
      * Get the Task Id of connector.
+     *
+     * @return task name
      */
 
     String getTaskName();

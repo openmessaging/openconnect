@@ -33,8 +33,8 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
     /**
      * Poll this source task for new records.
      *
-     * @return
-     * @throws InterruptedException
+     * @return connectRecord list
+     * @throws InterruptedException task thread interupt exception
      */
     public abstract List<ConnectRecord> poll() throws InterruptedException;
 
@@ -48,7 +48,9 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
      * in their own system.
      * </p>
      *
-     * @throws InterruptedException
+     * @throws InterruptedException task thread interupt exception
+     *
+     * @param connectRecords
      */
     public void commit(final List<ConnectRecord> connectRecords) throws InterruptedException {
         commit();
@@ -64,7 +66,7 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
     /**
      * Get source task context.
      *
-     * @return
+     * @return source task context
      */
     public SourceTaskContext getContext() {
         return sourceTaskContext;
