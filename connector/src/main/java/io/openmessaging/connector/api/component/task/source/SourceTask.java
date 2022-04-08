@@ -50,7 +50,7 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
      *
      * @throws InterruptedException task thread interupt exception
      *
-     * @param connectRecords
+     * @param connectRecords connect records
      */
     public void commit(final List<ConnectRecord> connectRecords) throws InterruptedException {
         commit();

@@ -31,8 +31,7 @@ public interface OffsetStorageReader {
      *
      * @return record offset
      */
-    <T> RecordOffset readOffset(RecordPartition partition);
-
+     RecordOffset readOffset(RecordPartition partition);
 
     /**
      * Get the offset for the specified partitions.
@@ -41,6 +40,6 @@ public interface OffsetStorageReader {
      *
      * @return record partition offset pair
      */
-    <T> Map<RecordPartition, RecordOffset> readOffsets(Collection<RecordPartition> partitions);
+     Map<RecordPartition, RecordOffset> readOffsets(Collection<RecordPartition> partitions);
 
 }

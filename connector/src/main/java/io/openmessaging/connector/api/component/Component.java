@@ -25,21 +25,21 @@ public interface Component<R extends ComponentContext> {
     /**
      * Should invoke before start the connector.
      *
-     * @param config
+     * @param config component config
      */
     void validate(KeyValue config);
 
     /**
      * Init the component
      *
-     * @param config
+     * @param config component config
      */
     void init(KeyValue config);
 
     /**
      * Start the component
      *
-     * @param componentContext
+     * @param componentContext component context
      */
     void start(R componentContext);
 
