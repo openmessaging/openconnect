@@ -14,6 +14,7 @@
 
 package io.openmessaging.connector.api.component.task.source;
 
+import io.openmessaging.KeyValue;
 import io.openmessaging.connector.api.component.task.Task;
 import io.openmessaging.connector.api.data.ConnectRecord;
 import java.util.List;
@@ -66,6 +67,15 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
      */
     public SourceTaskContext getContext() {
         return sourceTaskContext;
+    }
+
+    /**
+     * Should invoke before start the connector.
+     * @param config component config
+     */
+    @Override
+    public void validate(KeyValue config) {
+
     }
 
 }

@@ -14,6 +14,7 @@
 
 package io.openmessaging.connector.api.component.task.sink;
 
+import io.openmessaging.KeyValue;
 import io.openmessaging.connector.api.component.task.Task;
 import io.openmessaging.connector.api.data.ConnectRecord;
 import io.openmessaging.connector.api.data.RecordOffset;
@@ -56,5 +57,14 @@ public abstract class SinkTask implements Task<SinkTaskContext> {
     public Map<RecordPartition, RecordOffset> preCommit(Map<RecordPartition, RecordOffset> currentOffsets) {
         flush(currentOffsets);
         return currentOffsets;
+    }
+
+    /**
+     * Should invoke before start the connector.
+     * @param config component config
+     */
+    @Override
+    public void validate(KeyValue config) {
+
     }
 }
