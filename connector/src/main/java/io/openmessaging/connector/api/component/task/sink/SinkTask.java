@@ -67,4 +67,20 @@ public abstract class SinkTask implements Task<SinkTaskContext> {
     public void validate(KeyValue config) {
 
     }
+
+    /**
+     * Pause the task.
+     */
+    @Override
+    public void pause() {
+
+    }
+
+    /**
+     * Resume the task.
+     */
+    @Override
+    public void resume() {
+
+    }
 }

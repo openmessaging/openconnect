@@ -22,11 +22,13 @@ public interface Task<R extends ComponentContext> extends Component<R> {
     /**
      * Pause the task.
      */
+    @Deprecated
     void pause();
 
     /**
      * Resume the task.
      */
+    @Deprecated
     void resume();
 
 }

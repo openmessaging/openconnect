@@ -67,6 +67,24 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
     }
 
     @Override
-    public void validate(KeyValue config){}
+    public void validate(KeyValue config){
+
+    }
+
+    /**
+     * Pause the task.
+     */
+    @Override
+    public void pause() {
+
+    }
+
+    /**
+     * Resume the task.
+     */
+    @Override
+    public void resume() {
+
+    }
 
 }
