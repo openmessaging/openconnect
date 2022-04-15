@@ -23,7 +23,7 @@ public abstract class Connector implements Component<ConnectorContext> {
 
     protected ConnectorContext connectorContext;
 
-    @Override public void start(ConnectorContext connectorContext) {
+    @Override public void init(ConnectorContext connectorContext) {
         this.connectorContext = connectorContext;
     }
 

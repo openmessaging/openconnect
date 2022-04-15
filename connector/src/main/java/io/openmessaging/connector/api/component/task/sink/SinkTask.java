@@ -27,7 +27,7 @@ public abstract class SinkTask implements Task<SinkTaskContext> {
 
     protected SinkTaskContext sinkTaskContext;
 
-    @Override public void start(SinkTaskContext sinkTaskContext) {
+    @Override public void init(SinkTaskContext sinkTaskContext) {
         this.sinkTaskContext = sinkTaskContext;
     }
 
