@@ -14,8 +14,24 @@ import java.util.Objects;
  */
 public class Struct {
 
-    private final Schema schema;
-    private final Object[] values;
+    private Schema schema;
+    private Object[] values;
+
+    public Schema getSchema() {
+        return schema;
+    }
+
+    public void setSchema(Schema schema) {
+        this.schema = schema;
+    }
+
+    public Object[] getValues() {
+        return values;
+    }
+
+    public void setValues(Object[] values) {
+        this.values = values;
+    }
 
     /**
      * construct
@@ -28,6 +44,9 @@ public class Struct {
         this.schema = schema;
         this.values = new Object[schema.getFields().size()];
     }
+
+
+
 
     /**
      * get schema
@@ -54,8 +73,8 @@ public class Struct {
      */
     public Object get(Field field) {
         Object val = values[field.getIndex()];
-        if (val == null && field.getSchema().defaultValue() != null) {
-            val = field.getSchema().defaultValue();
+        if (val == null && field.getSchema().getDefaultValue() != null) {
+            val = field.getSchema().getDefaultValue();
         }
         return val;
     }
@@ -201,7 +220,7 @@ public class Struct {
         for (Field field : schema.getFields()) {
             Schema fieldSchema = field.getSchema();
             Object value = values[field.getIndex()];
-            if (value == null && (fieldSchema.isOptional() || fieldSchema.defaultValue() != null)) {
+            if (value == null && (fieldSchema.isOptional() || fieldSchema.getDefaultValue() != null)) {
                 continue;
             }
             Schema.validateValue(field.getName(), fieldSchema, value);

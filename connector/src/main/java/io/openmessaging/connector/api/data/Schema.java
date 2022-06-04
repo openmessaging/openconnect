@@ -123,36 +123,62 @@ public class Schema {
         this.fieldsByName.put(field.getName(), field);
     }
 
-    public Schema keySchema() {
-        return keySchema;
+
+    public Integer getVersion() {
+        return version;
     }
-    public Schema valueSchema() {
-        return valueSchema;
+
+    public void setVersion(Integer version) {
+        this.version = version;
     }
 
     public boolean isOptional() {
         return optional;
     }
 
-    public Object defaultValue(){
+    public void setOptional(boolean optional) {
+        this.optional = optional;
+    }
+
+    public Object getDefaultValue() {
         return defaultValue;
     }
 
-    /**
-     * Get the optional version of the schema. If a version is included, newer versions *must* be larger than older ones.
-     * @return the version of this schema
-     */
-    public Integer version(){
-        return version;
+    public void setDefaultValue(Object defaultValue) {
+        this.defaultValue = defaultValue;
     }
 
-    /**
-     * @return the documentation for this schema
-     */
-    public String doc() {
+    public String getDoc() {
         return doc;
     }
 
+    public void setDoc(String doc) {
+        this.doc = doc;
+    }
+
+    public Map<String, Field> getFieldsByName() {
+        return fieldsByName;
+    }
+
+    public void setFieldsByName(Map<String, Field> fieldsByName) {
+        this.fieldsByName = fieldsByName;
+    }
+
+    public Schema getKeySchema() {
+        return keySchema;
+    }
+
+    public void setKeySchema(Schema keySchema) {
+        this.keySchema = keySchema;
+    }
+
+    public Schema getValueSchema() {
+        return valueSchema;
+    }
+
+    public void setValueSchema(Schema valueSchema) {
+        this.valueSchema = valueSchema;
+    }
 
     public String getName() {
         return name;
@@ -239,14 +265,14 @@ public class Schema {
             case ARRAY:
                 List<?> array = (List<?>) value;
                 for (Object entry : array) {
-                    validateValue(schema.valueSchema(), entry);
+                    validateValue(schema.getValueSchema(), entry);
                 }
                 break;
             case MAP:
                 Map<?, ?> map = (Map<?, ?>) value;
                 for (Map.Entry<?, ?> entry : map.entrySet()) {
-                    validateValue(schema.keySchema(), entry.getKey());
-                    validateValue(schema.valueSchema(), entry.getValue());
+                    validateValue(schema.getKeySchema(), entry.getKey());
+                    validateValue(schema.getValueSchema(), entry.getValue());
                 }
                 break;
         }

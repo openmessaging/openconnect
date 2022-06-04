@@ -87,7 +87,7 @@ public class SchemaBuilder {
 
 
     public boolean isOptional() {
-        return this.optional == null ? false : optional;
+        return this.optional == null ? true : optional;
     }
 
 
