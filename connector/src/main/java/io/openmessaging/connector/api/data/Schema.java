@@ -14,17 +14,70 @@
 
 package io.openmessaging.connector.api.data;
 
+import io.openmessaging.connector.api.data.logical.Date;
+import io.openmessaging.connector.api.data.logical.Decimal;
+import io.openmessaging.connector.api.data.logical.Time;
+import io.openmessaging.connector.api.data.logical.Timestamp;
 import io.openmessaging.connector.api.errors.ConnectException;
 
+import java.math.BigDecimal;
+import java.nio.ByteBuffer;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Schema
  */
 public class Schema {
+
+    /**
+     * Maps Schema.Types to a list of Java classes that can be used to represent them.
+     */
+    public static final Map<FieldType, List<Class>> SCHEMA_TYPE_CLASSES = new EnumMap<>(FieldType.class);
+
+    /**
+     * Maps known logical types to a list of Java classes that can be used to represent them.
+     */
+    private static final Map<String, List<Class>> LOGICAL_TYPE_CLASSES = new HashMap<>();
+
+    /**
+     * Maps the Java classes to the corresponding Schema.Type.
+     */
+    public static final Map<Class<?>, FieldType> JAVA_CLASS_SCHEMA_TYPES = new HashMap<>();
+
+    static {
+        SCHEMA_TYPE_CLASSES.put(FieldType.INT8, Collections.singletonList((Class) Byte.class));
+        SCHEMA_TYPE_CLASSES.put(FieldType.INT16, Collections.singletonList((Class) Short.class));
+        SCHEMA_TYPE_CLASSES.put(FieldType.INT32, Collections.singletonList((Class) Integer.class));
+        SCHEMA_TYPE_CLASSES.put(FieldType.INT64, Collections.singletonList((Class) Long.class));
+        SCHEMA_TYPE_CLASSES.put(FieldType.FLOAT32, Collections.singletonList((Class) Float.class));
+        SCHEMA_TYPE_CLASSES.put(FieldType.FLOAT64, Collections.singletonList((Class) Double.class));
+        SCHEMA_TYPE_CLASSES.put(FieldType.BOOLEAN, Collections.singletonList((Class) Boolean.class));
+        SCHEMA_TYPE_CLASSES.put(FieldType.STRING, Collections.singletonList((Class) String.class));
+        SCHEMA_TYPE_CLASSES.put(FieldType.BYTES, Arrays.asList((Class) byte[].class, (Class) ByteBuffer.class));
+        SCHEMA_TYPE_CLASSES.put(FieldType.ARRAY, Collections.singletonList((Class) List.class));
+        SCHEMA_TYPE_CLASSES.put(FieldType.MAP, Collections.singletonList((Class) Map.class));
+        SCHEMA_TYPE_CLASSES.put(FieldType.STRUCT, Collections.singletonList((Class) Struct.class));
+
+        for (Map.Entry<FieldType, List<Class>> schemaClasses : SCHEMA_TYPE_CLASSES.entrySet()) {
+            for (Class<?> schemaClass : schemaClasses.getValue()) {
+                JAVA_CLASS_SCHEMA_TYPES.put(schemaClass, schemaClasses.getKey());
+            }
+        }
+
+        LOGICAL_TYPE_CLASSES.put(Decimal.LOGICAL_NAME, Collections.singletonList((Class) BigDecimal.class));
+        LOGICAL_TYPE_CLASSES.put(Date.LOGICAL_NAME, Collections.singletonList((Class) java.util.Date.class));
+        LOGICAL_TYPE_CLASSES.put(Time.LOGICAL_NAME, Collections.singletonList((Class) java.util.Date.class));
+        LOGICAL_TYPE_CLASSES.put(Timestamp.LOGICAL_NAME, Collections.singletonList((Class) java.util.Date.class));
+
+    }
+
 
     /**
      * Name of the schema.
@@ -55,7 +108,7 @@ public class Schema {
      */
     private List<Field> fields;
     private Map<String, Field> fieldsByName;
-
+    private Map<String, String> parameters;
     /**
      * map type
      */
@@ -65,13 +118,14 @@ public class Schema {
     /**
      * Construct a Schema. Most users should not construct schemas manually, preferring {@link SchemaBuilder} instead.
      */
-    public Schema(String name,FieldType fieldType, boolean optional, Object defaultValue, Integer version, String doc, List<Field> fields,Schema keySchema, Schema valueSchema) {
+    public Schema(String name,FieldType fieldType, boolean optional, Object defaultValue, Integer version, String doc, List<Field> fields,Schema keySchema, Schema valueSchema, Map<String, String> parameters) {
         this.fieldType = fieldType;
         this.optional = optional;
         this.defaultValue = defaultValue;
         this.name = name;
         this.version = version;
         this.doc = doc;
+        this.parameters = parameters;
         if (this.fieldType == FieldType.STRUCT) {
             this.fields = fields == null ? Collections.<Field>emptyList() : fields;
             this.fieldsByName = new HashMap<>(this.fields.size());
@@ -91,7 +145,7 @@ public class Schema {
      * Construct a Schema. Most users should not construct schemas manually, preferring {@link SchemaBuilder} instead.
      */
     public Schema(String name,FieldType fieldType, boolean optional, Object defaultValue, Integer version, List<Field> fields) {
-        this(name, fieldType, optional, defaultValue, version, null, fields, null, null);
+        this(name, fieldType, optional, defaultValue, version, null, fields, null, null,new ConcurrentHashMap<>());
     }
 
 
@@ -102,28 +156,7 @@ public class Schema {
         this(name, fieldType, false, null, null,  fields);
     }
 
-    /**
-     * get field
-     * @param fieldName
-     * @return
-     */
-    public Field getField(String fieldName) {
-        if (fieldsByName.containsKey(fieldName)){
-            return fieldsByName.get(fieldName);
-        }
-        return null;
-    }
-
-    /**
-     * add field
-     * @param field
-     */
-    public void addField(Field field) {
-        this.fields.add(field);
-        this.fieldsByName.put(field.getName(), field);
-    }
-
-
+    // start getter and setter
     public Integer getVersion() {
         return version;
     }
@@ -204,6 +237,37 @@ public class Schema {
         this.fields = fields;
     }
 
+    public Map<String, String> getParameters() {
+        return parameters;
+    }
+
+    public void setParameters(Map<String, String> parameters) {
+        this.parameters = parameters;
+    }
+
+    // end getter and setter
+
+    /**
+     * get field
+     * @param fieldName
+     * @return
+     */
+    public Field getField(String fieldName) {
+        if (fieldsByName.containsKey(fieldName)){
+            return fieldsByName.get(fieldName);
+        }
+        return null;
+    }
+
+    /**
+     * add field
+     * @param field
+     */
+    public void addField(Field field) {
+        this.fields.add(field);
+        this.fieldsByName.put(field.getName(), field);
+    }
+
     /**
      * Validate that the value can be used for this schema
      */
@@ -217,7 +281,6 @@ public class Schema {
         validateValue(null, schema, value);
     }
     public static void validateValue(String name, Schema schema, Object value) {
-
         // check optional
         if (value == null) {
             if (!schema.isOptional()) {
@@ -229,7 +292,6 @@ public class Schema {
 
         // check field type
         List<Class> expectedClasses = expectedClassesFor(schema);
-
         if (expectedClasses == null) {
             throw new ConnectException("Invalid Java object for schema type " + schema.getFieldType()
                     + ": " + value.getClass()
@@ -284,8 +346,37 @@ public class Schema {
      * @return
      */
     private static List<Class> expectedClassesFor(Schema schema) {
-        return FieldType.SCHEMA_TYPE_CLASSES.get(schema.getFieldType());
+        List<Class> expectedClasses = LOGICAL_TYPE_CLASSES.get(schema.getName());
+        if (expectedClasses == null) {
+            expectedClasses = SCHEMA_TYPE_CLASSES.getOrDefault(schema.getFieldType(), Collections.emptyList());
+        }
+        return expectedClasses;
     }
+
+
+    /**
+     *  Get the type associated with the given class.
+     * @param klass
+     * @return
+     */
+    public static FieldType schemaType(Class<?> klass) {
+        synchronized (JAVA_CLASS_SCHEMA_TYPES) {
+            FieldType schemaType = JAVA_CLASS_SCHEMA_TYPES.get(klass);
+            if (Objects.nonNull(schemaType)) {
+                return schemaType;
+            }
+            for (Map.Entry<Class<?>, FieldType> entry : JAVA_CLASS_SCHEMA_TYPES.entrySet()) {
+                try {
+                    klass.asSubclass(entry.getKey());
+                    JAVA_CLASS_SCHEMA_TYPES.put(klass, entry.getValue());
+                    return entry.getValue();
+                } catch (ClassCastException e) {
+                }
+            }
+        }
+        return null;
+    }
+
 
     @Override
     public String toString() {
@@ -297,6 +388,8 @@ public class Schema {
                 ", doc='" + doc + '\'' +
                 ", fieldType=" + fieldType +
                 ", fields=" + fields +
+                ", fieldsByName=" + fieldsByName +
+                ", parameters=" + parameters +
                 ", keySchema=" + keySchema +
                 ", valueSchema=" + valueSchema +
                 '}';

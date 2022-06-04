@@ -14,6 +14,9 @@
 
 package io.openmessaging.connector.api.data;
 
+import io.openmessaging.connector.api.data.logical.Date;
+import io.openmessaging.connector.api.data.logical.Decimal;
+import io.openmessaging.connector.api.data.logical.Timestamp;
 import io.openmessaging.connector.api.errors.ConnectException;
 import io.openmessaging.connector.api.errors.SchemaBuilderException;
 
@@ -64,6 +67,7 @@ public class SchemaBuilder {
      * Structure of the schema, contains a list of {@link Field}
      */
     private Map<String, Field> fields;
+    private Map<String, String> parameters;
 
     /**
      * map type
@@ -195,6 +199,42 @@ public class SchemaBuilder {
         return builder;
     }
 
+
+    /**
+     * date
+     * @return
+     */
+    public static SchemaBuilder date() {
+        return Date.builder();
+    }
+
+    /**
+     * time
+     * @return
+     */
+    public static SchemaBuilder time() {
+        return Timestamp.builder();
+    }
+
+    /**
+     * timestamp
+     * @return
+     */
+    public static SchemaBuilder timestamp() {
+        return Timestamp.builder();
+    }
+
+    /**
+     * decimal
+     * @param scale
+     * @return
+     */
+    public static SchemaBuilder decimal(int scale) {
+        return  Decimal.builder(scale);
+    }
+
+
+
     /**
      * Add a field to this struct schema，ensure sequence
      */
@@ -280,6 +320,44 @@ public class SchemaBuilder {
         return this;
     }
 
+    public Map<String, String> parameters() {
+        return parameters == null ? null : Collections.unmodifiableMap(parameters);
+    }
+
+
+    /**
+     * Set a schema parameter
+     * @param propertyName
+     * @param propertyValue
+     * @return
+     */
+    public SchemaBuilder parameter(String propertyName, String propertyValue) {
+        // Preserve order of insertion with a LinkedHashMap. This isn't strictly necessary, but is nice if logical types
+        // can print their properties in a consistent order.
+        if (parameters == null) {
+            parameters = new LinkedHashMap<>();
+        }
+        parameters.put(propertyName, propertyValue);
+        return this;
+    }
+
+    /**
+     * Set schema parameters
+     * @param props
+     * @return
+     */
+    public SchemaBuilder parameters(Map<String, String> props) {
+        // Avoid creating an empty set of properties so we never have an empty map
+        if (props.isEmpty()) {
+            return this;
+        }
+        if (parameters == null) {
+            parameters = new LinkedHashMap<>();
+        }
+        parameters.putAll(props);
+        return this;
+    }
+
     /**
      * Set the default value for this schema. The value is validated against the schema type, throwing a
      * {@link SchemaBuilderException} if it does not match.
@@ -312,6 +390,6 @@ public class SchemaBuilder {
      */
     public Schema build() {
         return new Schema(name, type, isOptional(), defaultValue, version, doc,
-                fields == null ? null : Collections.unmodifiableList(new ArrayList<>(fields.values())), keySchema, valueSchema);
+                fields == null ? null : Collections.unmodifiableList(new ArrayList<>(fields.values())), keySchema, valueSchema, parameters);
     }
 }
