@@ -42,7 +42,7 @@ public class Time {
      * as required/optional, default value, and documentation.
      * @return a SchemaBuilder
      */
-    private static SchemaBuilder builder() {
+    public static SchemaBuilder builder() {
         return SchemaBuilder.int32()
                 .name(LOGICAL_NAME)
                 .version(1);

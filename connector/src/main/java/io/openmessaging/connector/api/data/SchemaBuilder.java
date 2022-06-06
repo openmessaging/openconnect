@@ -320,6 +320,15 @@ public class SchemaBuilder {
         return this;
     }
 
+    /**
+     * Set this schema as required.
+     */
+    public SchemaBuilder required() {
+        checkCanSet(OPTIONAL_FIELD, optional, false);
+        optional = false;
+        return this;
+    }
+
     public Map<String, String> parameters() {
         return parameters == null ? null : Collections.unmodifiableMap(parameters);
     }
