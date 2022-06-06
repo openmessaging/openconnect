@@ -306,7 +306,7 @@ public class SchemaBuilder {
      * Set the documentation for this schema.
      */
     public SchemaBuilder doc(String doc) {
-        checkCanSet(DOC_FIELD, optional, true);
+        checkCanSet(DOC_FIELD, this.doc, doc);
         this.doc = doc;
         return this;
     }
