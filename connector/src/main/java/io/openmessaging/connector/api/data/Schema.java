@@ -377,6 +377,18 @@ public class Schema {
         return null;
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Schema)) return false;
+        Schema schema = (Schema) o;
+        return isOptional() == schema.isOptional() && Objects.equals(getName(), schema.getName()) && Objects.equals(getVersion(), schema.getVersion()) && Objects.equals(getDefaultValue(), schema.getDefaultValue()) && Objects.equals(getDoc(), schema.getDoc()) && getFieldType() == schema.getFieldType() && Objects.equals(getFields(), schema.getFields()) && Objects.equals(getParameters(), schema.getParameters()) && Objects.equals(getKeySchema(), schema.getKeySchema()) && Objects.equals(getValueSchema(), schema.getValueSchema());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getName(), getVersion(), isOptional(), getDefaultValue(), getDoc(), getFieldType(), getFields(), getParameters(), getKeySchema(), getValueSchema());
+    }
 
     @Override
     public String toString() {
