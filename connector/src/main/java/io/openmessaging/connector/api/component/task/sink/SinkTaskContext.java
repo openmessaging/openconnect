@@ -72,4 +72,14 @@ public interface SinkTaskContext extends ComponentContext {
      * @return the partition list
      */
     Set<RecordPartition> assignment();
+
+
+    /**
+     * get error record reporter
+     * @return
+     */
+    default ErrorRecordReporter errorRecordReporter() {
+        return null;
+    }
+
 }
