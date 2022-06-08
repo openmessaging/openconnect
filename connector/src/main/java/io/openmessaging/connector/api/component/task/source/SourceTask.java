@@ -14,7 +14,6 @@
 
 package io.openmessaging.connector.api.component.task.source;
 
-import io.openmessaging.KeyValue;
 import io.openmessaging.connector.api.component.task.Task;
 import io.openmessaging.connector.api.data.ConnectRecord;
 import java.util.List;
@@ -22,7 +21,8 @@ import java.util.List;
 public abstract class SourceTask implements Task<SourceTaskContext> {
 
     protected SourceTaskContext sourceTaskContext;
-    @Override public void init(SourceTaskContext sourceTaskContext) {
+    @Override
+    public void init(SourceTaskContext sourceTaskContext) {
         this.sourceTaskContext = sourceTaskContext;
     }
 
@@ -56,35 +56,4 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
      * function.
      */
     public void commit() { }
-
-    /**
-     * Get source task context.
-     * @return source task context
-     */
-    @Deprecated
-    public SourceTaskContext getContext() {
-        return sourceTaskContext;
-    }
-
-    @Override
-    public void validate(KeyValue config){
-
-    }
-
-    /**
-     * Pause the task.
-     */
-    @Override
-    public void pause() {
-
-    }
-
-    /**
-     * Resume the task.
-     */
-    @Override
-    public void resume() {
-
-    }
-
 }

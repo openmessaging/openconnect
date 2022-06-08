@@ -16,6 +16,9 @@ package io.openmessaging.connector.api.component.task.sink;
 
 import io.openmessaging.connector.api.component.connector.Connector;
 
+/**
+ * sink connector
+ */
 public abstract class SinkConnector extends Connector {
 
     public SinkConnector() {

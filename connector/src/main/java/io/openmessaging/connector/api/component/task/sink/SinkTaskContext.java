@@ -21,6 +21,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+/**
+ * sink task context
+ */
 public interface SinkTaskContext extends ComponentContext {
 
     /**
