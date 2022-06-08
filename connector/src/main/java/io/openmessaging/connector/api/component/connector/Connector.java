@@ -23,19 +23,10 @@ public abstract class Connector implements Component<ConnectorContext> {
 
     protected ConnectorContext connectorContext;
 
-    @Override public void start(ConnectorContext connectorContext) {
+    @Override
+    public void init(ConnectorContext connectorContext) {
         this.connectorContext = connectorContext;
     }
-
-    /**
-     * Pause the connector.
-     */
-    public abstract void pause();
-
-    /**
-     * Resume the connector.
-     */
-    public abstract void resume();
 
     /**
      * Returns a set of configurations for Tasks based on the current configuration,
@@ -53,4 +44,12 @@ public abstract class Connector implements Component<ConnectorContext> {
      */
     public abstract Class<? extends Task> taskClass();
 
+    /**
+     * Should invoke before start the connector.
+     * @param config component config
+     */
+    @Override
+    public void validate(KeyValue config){
+
+    }
 }

@@ -28,16 +28,16 @@ public interface Component<R extends ComponentContext> {
     /**
      * Init the component
      *
-     * @param config component config
+     * @param context component context
      */
-    void init(KeyValue config);
+    void init(R context);
 
     /**
      * Start the component
      *
-     * @param componentContext component context
+     * @param config component context
      */
-    void start(R componentContext);
+    void start(KeyValue config);
 
     /**
      * Stop the component.

@@ -21,8 +21,8 @@ import java.util.List;
 public abstract class SourceTask implements Task<SourceTaskContext> {
 
     protected SourceTaskContext sourceTaskContext;
-
-    @Override public void start(SourceTaskContext sourceTaskContext) {
+    @Override
+    public void init(SourceTaskContext sourceTaskContext) {
         this.sourceTaskContext = sourceTaskContext;
     }
 
@@ -45,7 +45,6 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
      * </p>
      *
      * @throws InterruptedException task thread interupt exception
-     *
      * @param connectRecords connect records
      */
     public void commit(final List<ConnectRecord> connectRecords) throws InterruptedException {
@@ -56,16 +55,5 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
      * If the user wants to use external storage to save the position,user can implement this
      * function.
      */
-    public void commit() {
-    }
-
-    /**
-     * Get source task context.
-     *
-     * @return source task context
-     */
-    public SourceTaskContext getContext() {
-        return sourceTaskContext;
-    }
-
+    public void commit() { }
 }

@@ -16,6 +16,9 @@ package io.openmessaging.connector.api.component.task.source;
 
 import io.openmessaging.connector.api.component.connector.Connector;
 
+/**
+ * source connector
+ */
 public abstract class SourceConnector extends Connector {
 
 }
