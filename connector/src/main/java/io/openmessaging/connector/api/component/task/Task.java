@@ -14,19 +14,17 @@
 
 package io.openmessaging.connector.api.component.task;
 
+import io.openmessaging.KeyValue;
 import io.openmessaging.connector.api.component.Component;
 import io.openmessaging.connector.api.component.ComponentContext;
 
 public interface Task<R extends ComponentContext> extends Component<R> {
 
     /**
-     * Pause the task.
+     * Should invoke before start the connector.
+     *
+     * @param config component config
      */
-    void pause();
-
-    /**
-     * Resume the task.
-     */
-    void resume();
-
+    @Override
+    default void validate(KeyValue config) {}
 }
