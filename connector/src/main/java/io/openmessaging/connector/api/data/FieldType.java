@@ -18,43 +18,90 @@ package io.openmessaging.connector.api.data;
  * Define the field type.
  */
 public enum FieldType {
-    /** Short Integer */
+
+    /**
+     * Byte Integer
+     */
     INT8,
 
-    /** Integer */
+    /**
+     * Short
+     */
+    INT16,
+
+    /**
+     * Integer
+     */
     INT32,
 
-    /** Long */
+    /**
+     * Long
+     */
     INT64,
 
-    /** BigInteger */
-    BIG_INTEGER,
-
-    /** Float */
+    /**
+     * Float
+     */
     FLOAT32,
 
-    /** Double */
+    /**
+     * Double
+     */
     FLOAT64,
 
-    /** Boolean */
+    /**
+     * Boolean
+     */
     BOOLEAN,
 
-    /** String */
+    /**
+     * String
+     */
     STRING,
 
-    /** Byte */
+    /**
+     * Byte
+     */
     BYTES,
 
-    /** List */
+    /**
+     * List
+     */
     ARRAY,
 
-    /** Map */
+    /**
+     * Map
+     */
     MAP,
 
-    /** Date */
+    /**
+     * Date
+     */
     DATETIME,
+
     /**
      * Structured
      */
-    STRUCT
+    STRUCT;
+
+    /**
+     * Determine whether it is a basic type
+     *
+     * @return
+     */
+    public boolean isPrimitive() {
+        switch (this) {
+            case INT8:
+            case INT16:
+            case INT32:
+            case INT64:
+            case FLOAT32:
+            case FLOAT64:
+            case BOOLEAN:
+            case STRING:
+            case BYTES:
+                return true;
+        }
+        return false;
+    }
 }

@@ -14,6 +14,8 @@
 
 package io.openmessaging.connector.api.data;
 
+import java.util.Objects;
+
 /**
  * Filed of the schema.
  */
@@ -60,6 +62,20 @@ public class Field {
 
     public void setSchema(Schema schema) {
         this.schema = schema;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Field)) return false;
+        Field field = (Field) o;
+        return getIndex() == field.getIndex() && Objects.equals(getName(), field.getName()) && Objects.equals(getSchema(), field.getSchema());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getIndex(), getName(), getSchema());
     }
 
     @Override public String toString() {
