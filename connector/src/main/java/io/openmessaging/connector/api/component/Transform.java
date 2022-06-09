@@ -14,6 +14,7 @@
 
 package io.openmessaging.connector.api.component;
 
+import io.openmessaging.KeyValue;
 import io.openmessaging.connector.api.data.ConnectRecord;
 
 /**
@@ -22,7 +23,23 @@ import io.openmessaging.connector.api.data.ConnectRecord;
  * @version OMS 0.1.0
  * @since OMS 0.1.0
  */
-public interface Transform<R extends ConnectRecord> extends Component {
+public interface Transform<R extends ConnectRecord> extends AutoCloseable {
+    /**
+     * config
+     * @param config
+     */
+    void config(KeyValue config);
 
+    /**
+     * transform record
+     * @param record
+     * @return
+     */
     R doTransform(R record);
+
+    /**
+     * close
+     */
+    @Override
+    void close();
 }
