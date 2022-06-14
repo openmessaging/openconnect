@@ -14,6 +14,7 @@
 
 package io.openmessaging.connector.api.component.task.source;
 
+import io.openmessaging.KeyValue;
 import io.openmessaging.connector.api.component.ComponentContext;
 import io.openmessaging.connector.api.storage.OffsetStorageReader;
 
@@ -40,4 +41,11 @@ public interface SourceTaskContext extends ComponentContext {
      */
 
     String getTaskName();
+
+    /**
+     * Get the configurations of current task.
+     *
+     * @return the configuration of current task.
+     */
+    KeyValue configs();
 }

@@ -14,6 +14,7 @@
 
 package io.openmessaging.connector.api.component.task.sink;
 
+import io.openmessaging.KeyValue;
 import io.openmessaging.connector.api.component.ComponentContext;
 import io.openmessaging.connector.api.data.RecordOffset;
 import io.openmessaging.connector.api.data.RecordPartition;
@@ -39,6 +40,13 @@ public interface SinkTaskContext extends ComponentContext {
      * @return task name
      */
     String getTaskName();
+
+    /**
+     * Get the configurations of current task.
+     *
+     * @return the configuration of current task.
+     */
+    KeyValue configs();
 
     /**
      * Reset the consumer offset for the given queue.
