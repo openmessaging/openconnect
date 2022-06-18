@@ -16,7 +16,7 @@ package io.openmessaging.connector.api.component;
 
 import io.openmessaging.KeyValue;
 
-public interface Component<R extends ComponentContext> {
+public interface Component {
 
     /**
      * Should invoke before start the connector.
@@ -24,13 +24,6 @@ public interface Component<R extends ComponentContext> {
      * @param config component config
      */
     void validate(KeyValue config);
-
-    /**
-     * Init the component
-     *
-     * @param context component context
-     */
-    void init(R context);
 
     /**
      * Start the component

@@ -18,9 +18,13 @@ import io.openmessaging.connector.api.component.task.Task;
 import io.openmessaging.connector.api.data.ConnectRecord;
 import java.util.List;
 
+/**
+ * The source task API definition is used to define the logic for data pulling
+ */
 public abstract class SourceTask implements Task<SourceTaskContext> {
 
     protected SourceTaskContext sourceTaskContext;
+
     @Override
     public void init(SourceTaskContext sourceTaskContext) {
         this.sourceTaskContext = sourceTaskContext;

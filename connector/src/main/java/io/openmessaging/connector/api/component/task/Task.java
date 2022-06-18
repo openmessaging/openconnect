@@ -18,7 +18,7 @@ import io.openmessaging.KeyValue;
 import io.openmessaging.connector.api.component.Component;
 import io.openmessaging.connector.api.component.ComponentContext;
 
-public interface Task<R extends ComponentContext> extends Component<R> {
+public interface Task<R extends ComponentContext> extends Component{
 
     /**
      * Should invoke before start the connector.
@@ -27,4 +27,11 @@ public interface Task<R extends ComponentContext> extends Component<R> {
      */
     @Override
     default void validate(KeyValue config) {}
+
+    /**
+     * Init the component
+     *
+     * @param context component context
+     */
+    void init(R context);
 }
