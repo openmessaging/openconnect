@@ -22,7 +22,7 @@
 
     <groupId>io.openmessaging</groupId>
     <artifactId>openmessaging-connect</artifactId>
-    <version>0.1.3</version>
+    <version>0.1.4-SNAPSHOT</version>
     <name>OpenMessaging Connect</name>
     <packaging>pom</packaging>
 

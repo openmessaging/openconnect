@@ -15,7 +15,7 @@
     <parent>
         <groupId>io.openmessaging</groupId>
         <artifactId>openmessaging-connect</artifactId>
-        <version>0.1.3</version>
+        <version>0.1.4-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
