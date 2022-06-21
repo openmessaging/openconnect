@@ -143,6 +143,13 @@ public class Schema {
 
     /**
      * Construct a Schema. Most users should not construct schemas manually, preferring {@link SchemaBuilder} instead.
+     *
+     * @param defaultValue defaultValue
+     * @param fields fields
+     * @param fieldType fieldType
+     * @param name name
+     * @param optional optional
+     * @param version version
      */
     public Schema(String name,FieldType fieldType, boolean optional, Object defaultValue, Integer version, List<Field> fields) {
         this(name, fieldType, optional, defaultValue, version, null, fields, null, null,new ConcurrentHashMap<>());
@@ -151,6 +158,10 @@ public class Schema {
 
     /**
      * Construct a Schema. Most users should not construct schemas manually, preferring {@link SchemaBuilder} instead.
+     *
+     * @param name name
+     * @param fieldType fieldType
+     * @param fields fields
      */
     public Schema(String name, FieldType fieldType, List<Field> fields) {
         this(name, fieldType, false, null, null,  fields);
@@ -249,8 +260,8 @@ public class Schema {
 
     /**
      * get field
-     * @param fieldName
-     * @return
+     * @param fieldName field name
+     * @return field
      */
     public Field getField(String fieldName) {
         if (fieldsByName.containsKey(fieldName)){
@@ -261,7 +272,7 @@ public class Schema {
 
     /**
      * add field
-     * @param field
+     * @param field field
      */
     public void addField(Field field) {
         this.fields.add(field);
@@ -270,16 +281,27 @@ public class Schema {
 
     /**
      * Validate that the value can be used for this schema
+     * @param value value
      */
     public void validateValue(Object value) {
         validateValue(this, value);
     }
     /**
      * Validate that the value can be used with the schema
+     * @param schema schema
+     * @param value value
      */
     public static void validateValue(Schema schema, Object value) {
         validateValue(null, schema, value);
     }
+
+    /**
+     * Validate that the value can be used with the schema
+     *
+     * @param name name
+     * @param schema schema
+     * @param value value
+     */
     public static void validateValue(String name, Schema schema, Object value) {
         // check optional
         if (value == null) {
@@ -342,8 +364,8 @@ public class Schema {
 
     /**
      * expected classes for
-     * @param schema
-     * @return
+     * @param schema schema
+     * @return class list
      */
     private static List<Class> expectedClassesFor(Schema schema) {
         List<Class> expectedClasses = LOGICAL_TYPE_CLASSES.get(schema.getName());
@@ -356,8 +378,8 @@ public class Schema {
 
     /**
      *  Get the type associated with the given class.
-     * @param klass
-     * @return
+     * @param klass class
+     * @return field type
      */
     public static FieldType schemaType(Class<?> klass) {
         synchronized (JAVA_CLASS_SCHEMA_TYPES) {

@@ -23,9 +23,8 @@ public interface ErrorRecordReporter {
 
     /**
      * report record
-     * @param record
-     * @param error
-     * @return
+     * @param record connect recore
+     * @param error error throwable
      */
     void report(ConnectRecord record, Throwable error);
 }

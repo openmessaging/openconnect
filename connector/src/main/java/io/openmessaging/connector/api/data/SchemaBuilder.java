@@ -172,6 +172,7 @@ public class SchemaBuilder {
 
     /**
      * @param valueSchema the schema for elements of the array
+     * @return schemaBuilder
      */
     public static SchemaBuilder array(Schema valueSchema) {
         if (null == valueSchema) {
@@ -185,6 +186,7 @@ public class SchemaBuilder {
     /**
      * @param keySchema   the schema for keys in the map
      * @param valueSchema the schema for values in the map
+     * @return schemaBuilder
      */
     public static SchemaBuilder map(Schema keySchema, Schema valueSchema) {
         if (null == keySchema) {
@@ -202,7 +204,7 @@ public class SchemaBuilder {
 
     /**
      * date
-     * @return
+     * @return schema builder
      */
     public static SchemaBuilder date() {
         return Date.builder();
@@ -210,7 +212,7 @@ public class SchemaBuilder {
 
     /**
      * time
-     * @return
+     * @return schema builder
      */
     public static SchemaBuilder time() {
         return Timestamp.builder();
@@ -218,7 +220,7 @@ public class SchemaBuilder {
 
     /**
      * timestamp
-     * @return
+     * @return schema builder
      */
     public static SchemaBuilder timestamp() {
         return Timestamp.builder();
@@ -227,7 +229,7 @@ public class SchemaBuilder {
     /**
      * decimal
      * @param scale
-     * @return
+     * @return schema builder
      */
     public static SchemaBuilder decimal(int scale) {
         return  Decimal.builder(scale);
@@ -237,6 +239,9 @@ public class SchemaBuilder {
 
     /**
      * Add a field to this struct schema，ensure sequence
+     * @param fieldName field name
+     * @param fieldSchema field schema
+     * @return schema builder
      */
     public SchemaBuilder field(String fieldName, Schema fieldSchema) {
         if (type != FieldType.STRUCT) {
@@ -259,6 +264,7 @@ public class SchemaBuilder {
 
     /**
      * Get the list of fields for this Schema. Throws a DataException if this schema is not a struct.
+     * @return field list
      */
     public List<Field> fields() {
         if (type != FieldType.STRUCT) {
@@ -270,8 +276,8 @@ public class SchemaBuilder {
     /**
      * get field by fieldName
      *
-     * @param fieldName
-     * @return
+     * @param fieldName field name
+     * @return field
      */
     public Field field(String fieldName) {
         if (type != FieldType.STRUCT) {
@@ -295,6 +301,9 @@ public class SchemaBuilder {
     /**
      * Set the version of this schema. Schema versions are integers which, if provided, must indicate which schema is
      * newer and which is older by their ordering.
+     *
+     * @param version version
+     * @return schema builder
      */
     public SchemaBuilder version(Integer version) {
         checkCanSet(VERSION_FIELD, this.version, version);
@@ -304,6 +313,9 @@ public class SchemaBuilder {
 
     /**
      * Set the documentation for this schema.
+     *
+     * @param doc  doc
+     * @return schema builder
      */
     public SchemaBuilder doc(String doc) {
         checkCanSet(DOC_FIELD, this.doc, doc);
@@ -313,6 +325,7 @@ public class SchemaBuilder {
 
     /**
      * Set this schema as optional.
+     * @return schema builder
      */
     public SchemaBuilder optional() {
         checkCanSet(OPTIONAL_FIELD, optional, true);
@@ -322,6 +335,7 @@ public class SchemaBuilder {
 
     /**
      * Set this schema as required.
+     * @return schema builder
      */
     public SchemaBuilder required() {
         checkCanSet(OPTIONAL_FIELD, optional, false);
@@ -338,7 +352,7 @@ public class SchemaBuilder {
      * Set a schema parameter
      * @param propertyName
      * @param propertyValue
-     * @return
+     * @return schema builder
      */
     public SchemaBuilder parameter(String propertyName, String propertyValue) {
         // Preserve order of insertion with a LinkedHashMap. This isn't strictly necessary, but is nice if logical types
@@ -352,8 +366,8 @@ public class SchemaBuilder {
 
     /**
      * Set schema parameters
-     * @param props
-     * @return
+     * @param props props
+     * @return schema builder
      */
     public SchemaBuilder parameters(Map<String, String> props) {
         // Avoid creating an empty set of properties so we never have an empty map
@@ -370,6 +384,8 @@ public class SchemaBuilder {
     /**
      * Set the default value for this schema. The value is validated against the schema type, throwing a
      * {@link SchemaBuilderException} if it does not match.
+     * @param value value
+     * @return schema builder
      */
     public SchemaBuilder defaultValue(Object value) {
         checkCanSet(DEFAULT_FIELD, defaultValue, value);
