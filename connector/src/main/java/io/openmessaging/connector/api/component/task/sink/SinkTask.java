@@ -23,13 +23,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * sink task
+ * The sink task API definition is used to define the logic for data writing
  */
 public abstract class SinkTask implements Task<SinkTaskContext> {
 
     protected SinkTaskContext sinkTaskContext;
 
-    @Override public void init(SinkTaskContext sinkTaskContext) {
+    @Override
+    public void init(SinkTaskContext sinkTaskContext) {
         this.sinkTaskContext = sinkTaskContext;
     }
 

@@ -16,16 +16,20 @@ package io.openmessaging.connector.api.component.connector;
 
 import io.openmessaging.KeyValue;
 import io.openmessaging.connector.api.component.Component;
+import io.openmessaging.connector.api.component.ComponentContext;
 import io.openmessaging.connector.api.component.task.Task;
 import java.util.List;
 
-public abstract class Connector implements Component<ConnectorContext> {
+public abstract class Connector<R extends ComponentContext> implements Component {
 
     protected ConnectorContext connectorContext;
 
-    @Override
     public void init(ConnectorContext connectorContext) {
         this.connectorContext = connectorContext;
+    }
+
+    protected ConnectorContext getConnectorContext() {
+        return connectorContext;
     }
 
     /**

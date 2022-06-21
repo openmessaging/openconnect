@@ -14,6 +14,7 @@
 
 package io.openmessaging.connector.api.component;
 
+import io.openmessaging.KeyValue;
 import io.openmessaging.connector.api.data.ConnectRecord;
 
 /**
@@ -24,5 +25,19 @@ import io.openmessaging.connector.api.data.ConnectRecord;
  */
 public interface Transform<R extends ConnectRecord> extends Component {
 
+    /**
+     * Should invoke before start the connector.
+     *
+     * @param config component config
+     */
+    @Override
+    default void validate(KeyValue config){
+
+    }
+    /**
+     * transform record
+     * @param record
+     * @return
+     */
     R doTransform(R record);
 }
