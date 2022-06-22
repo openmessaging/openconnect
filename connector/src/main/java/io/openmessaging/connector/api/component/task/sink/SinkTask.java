@@ -37,9 +37,9 @@ public abstract class SinkTask implements Task<SinkTaskContext> {
     /**
      * Put the records to the sink
      *
-     * @param sinkRecords sink records
+     * @param records sink records
      */
-    public abstract void put(List<ConnectRecord> sinkRecords) throws ConnectException;
+    public abstract void put(List<SinkRecord> records) throws ConnectException;
 
     /**
      * Flush the records to the sink
