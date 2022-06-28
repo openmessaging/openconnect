@@ -31,15 +31,15 @@ public interface  OffsetStorageWriter {
 
     /**
      * write offset
-     * @param partition
-     * @param position
+     * @param partition partition
+     * @param position position
      */
    void writeOffset(RecordPartition partition, RecordOffset position);
 
 
     /**
      * write offsets
-     * @param positions
+     * @param positions positions
      */
     void writeOffset(Map<RecordPartition, RecordOffset> positions);
 }

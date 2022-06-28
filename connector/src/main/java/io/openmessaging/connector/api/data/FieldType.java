@@ -86,8 +86,6 @@ public enum FieldType {
 
     /**
      * Determine whether it is a basic type
-     *
-     * @return
      */
     public boolean isPrimitive() {
         switch (this) {
