@@ -29,7 +29,7 @@ public interface RecordConverter {
 
     /**
      * Config is used for parameter passing in the conversion process
-     * @param configs
+     * @param configs converter config
      */
     default void configure(Map<String, ?> configs) {
 
@@ -40,7 +40,7 @@ public interface RecordConverter {
      * @param topic  the topic associated with the data
      * @param schema record schema
      * @param value  record value
-     * @return
+     * @return byte array
      */
     byte[] fromConnectData(String topic, Schema schema, Object value);
 
@@ -48,10 +48,10 @@ public interface RecordConverter {
     /**
      * The provided subject and extension may be used in the record as needed.
      * @param topic the topic associated with the data
-     * @param extensions
+     * @param extensions extensions
      * @param schema  rocketmq connect record schema
      * @param value rocketmq connect record value
-     * @return
+     * @return byte array
      */
     default byte[] fromConnectData(String topic, KeyValue extensions, Schema schema, Object value) {
         return fromConnectData(topic, schema, value);
@@ -71,8 +71,8 @@ public interface RecordConverter {
      * The provided subject and extension may be used in the record as needed.
      * @param topic  the topic associated with the data
      * @param extensions transform property
-     * @param value
-     * @return
+     * @param value value
+     * @return schema and value
      */
     default SchemaAndValue toConnectData(String topic, KeyValue extensions, byte[] value) {
         return toConnectData(topic, value);

@@ -36,8 +36,8 @@ public interface Transform<R extends ConnectRecord> extends Component {
     }
     /**
      * transform record
-     * @param record
-     * @return
+     * @param record connect record
+     * @return connect record
      */
     R doTransform(R record);
 }
