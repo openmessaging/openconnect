@@ -16,7 +16,9 @@ package io.openmessaging.connector.api.component.task.source;
 
 import io.openmessaging.connector.api.component.task.Task;
 import io.openmessaging.connector.api.data.ConnectRecord;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * The source task API definition is used to define the logic for data pulling
@@ -39,6 +41,15 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
     public abstract List<ConnectRecord> poll() throws InterruptedException;
 
     /**
+     * commit record
+     * @param record
+     * @param metadata
+     */
+    public void commit(final ConnectRecord record, Map<String,String> metadata) {
+        commit(record);
+    }
+
+    /**
      * <p>
      * Commit an individual {@link ConnectRecord} when the callback from the producer client is received.
      * </p>
@@ -48,11 +59,9 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
      * in their own system.
      * </p>
      *
-     * @throws InterruptedException task thread interupt exception
-     * @param connectRecords connect records
+     * @param record connect record
      */
-    public void commit(final List<ConnectRecord> connectRecords) throws InterruptedException {
-        commit();
+    public void commit(final ConnectRecord record) {
     }
 
     /**
