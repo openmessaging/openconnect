@@ -40,6 +40,14 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
      */
     public abstract List<ConnectRecord> poll() throws InterruptedException;
 
+
+    /**
+     * batch commit
+     * @param records
+     * @param metadata
+     */
+    public void commit(final List<ConnectRecord> records, Map<String,String> metadata) {
+    }
     /**
      * commit record
      * @param record
