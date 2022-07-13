@@ -64,25 +64,23 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
     /**
      * new record
      * @param topic
-     * @param queueId
      * @param schema
      * @param data
      * @param timestamp
      * @return
      */
-    public abstract R newRecord(String topic, Integer queueId, Schema schema, Object data, Long timestamp);
+    public abstract R newRecord(String topic, Schema schema, Object data, Long timestamp);
 
     /**
      *  new record
      * @param topic
-     * @param queueId
      * @param schema
      * @param data
      * @param timestamp
      * @param extensions
      * @return
      */
-    public abstract R newRecord(String topic, Integer queueId, Schema schema, Object data, Long timestamp, KeyValue extensions);
+    public abstract R newRecord(String topic, Schema schema, Object data, Long timestamp, KeyValue extensions);
 
 
     public String getTopic() {

@@ -1,3 +1,17 @@
+/*
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
 package io.openmessaging.connector.api.component.task.source;
 
 import io.openmessaging.KeyValue;
@@ -41,22 +55,20 @@ public class SourceRecord extends ConnectRecord<SourceRecord> {
      * new record
      *
      * @param topic
-     * @param queueId
      * @param schema
      * @param data
      * @param timestamp
      * @return
      */
     @Override
-    public SourceRecord newRecord(String topic, Integer queueId, Schema schema, Object data, Long timestamp) {
-        return newRecord(topic, queueId, schema , data, timestamp, null );
+    public SourceRecord newRecord(String topic, Schema schema, Object data, Long timestamp) {
+        return newRecord(topic, schema , data, timestamp, null );
     }
 
     /**
      * new record
      *
      * @param topic
-     * @param queueId
      * @param schema
      * @param data
      * @param timestamp
@@ -64,8 +76,8 @@ public class SourceRecord extends ConnectRecord<SourceRecord> {
      * @return
      */
     @Override
-    public SourceRecord newRecord(String topic, Integer queueId, Schema schema, Object data, Long timestamp, KeyValue extensions) {
-        return new SourceRecord(position().getPartition(), position().getOffset(), topic, queueId, timestamp, schema, data, extensions);
+    public SourceRecord newRecord(String topic, Schema schema, Object data, Long timestamp, KeyValue extensions) {
+        return new SourceRecord(position().getPartition(), position().getOffset(), topic, timestamp, schema, data, extensions);
     }
 
     @Override
