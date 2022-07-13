@@ -29,11 +29,6 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
     private String topic;
 
     /**
-     * queueId of the entry
-     */
-    private Integer queueId;
-
-    /**
      * Timestamp of the data entry.
      */
     private Long timestamp;
@@ -53,13 +48,12 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
      */
     private KeyValue extensions;
 
-    public ConnectRecord(String topic, Integer queueId, Long timestamp, Schema schema, Object data) {
-        this(topic, queueId, timestamp, schema, data, null);
+    public ConnectRecord(String topic, Long timestamp, Schema schema, Object data) {
+        this(topic,  timestamp, schema, data, null);
     }
 
-    public ConnectRecord(String topic, Integer queueId, Long timestamp, Schema schema, Object data,KeyValue extensions) {
+    public ConnectRecord(String topic, Long timestamp, Schema schema, Object data,KeyValue extensions) {
         this.topic = topic;
-        this.queueId = queueId;
         this.schema = schema;
         this.timestamp = timestamp;
         this.data = data;
@@ -97,14 +91,6 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
 
     public void setTopic(String topic) {
         this.topic = topic;
-    }
-
-    public Integer getQueueId() {
-        return queueId;
-    }
-
-    public void setQueueId(Integer queueId) {
-        this.queueId = queueId;
     }
 
     public Long getTimestamp() {
@@ -163,24 +149,24 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
         return this.extensions.getString(key);
     }
 
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ConnectRecord)) return false;
-        ConnectRecord record = (ConnectRecord) o;
-        return topic.equals(record.topic) && queueId.equals(record.queueId) && getTimestamp().equals(record.getTimestamp()) && getSchema().equals(record.getSchema()) && getData().equals(record.getData()) && getExtensions().equals(record.getExtensions());
+        ConnectRecord<?> that = (ConnectRecord<?>) o;
+        return Objects.equals(topic, that.topic) && Objects.equals(timestamp, that.timestamp) && Objects.equals(schema, that.schema) && Objects.equals(data, that.data) && Objects.equals(extensions, that.extensions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(topic, queueId, getTimestamp(), getSchema(), getData(), getExtensions());
+        return Objects.hash(topic, timestamp, schema, data, extensions);
     }
 
     @Override
     public String toString() {
         return "ConnectRecord{" +
                 "topic='" + topic + '\'' +
-                ", queueId=" + queueId +
                 ", timestamp=" + timestamp +
                 ", schema=" + schema +
                 ", data=" + data +

@@ -16,28 +16,20 @@ public class SourceRecord extends ConnectRecord<SourceRecord> {
 
     private final RecordPosition position;
 
-    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset, String topic, Schema schema, Object data) {
-        this(recordPartition, recordOffset, topic, null , null,schema , data, null);
-    }
-
     public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset, String topic, Schema schema, Object data, KeyValue extensions) {
-        this(recordPartition, recordOffset, topic, null , null,schema , data, extensions);
+        this(recordPartition, recordOffset, topic, null,schema , data, extensions);
     }
 
-    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset,String topic, Integer queueId, Schema schema, Object data) {
-        this(recordPartition, recordOffset, topic, queueId, null, schema , data, null);
+    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset,String topic, Schema schema, Object data) {
+        this(recordPartition, recordOffset, topic, null, schema , data, null);
     }
 
-    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset,String topic, Integer queueId, Schema schema, Object data, KeyValue extensions) {
-        this(recordPartition, recordOffset, topic, queueId, null, schema , data, extensions);
+    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset,String topic, Long timestamp, Schema schema, Object data) {
+        this(recordPartition, recordOffset, topic, timestamp, schema , data, null);
     }
 
-    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset,String topic, Integer queueId, Long timestamp, Schema schema, Object data) {
-        this(recordPartition, recordOffset, topic, queueId, timestamp, schema , data, null);
-    }
-
-    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset, String topic, Integer queueId, Long timestamp, Schema schema, Object data, KeyValue extensions) {
-        super(topic, queueId, timestamp, schema, data, extensions);
+    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset, String topic, Long timestamp, Schema schema, Object data, KeyValue extensions) {
+        super(topic, timestamp, schema, data, extensions);
         this.position = new RecordPosition(recordPartition, recordOffset);
     }
 

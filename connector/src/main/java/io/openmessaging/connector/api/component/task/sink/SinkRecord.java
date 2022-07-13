@@ -11,6 +11,7 @@ import java.util.Objects;
  */
 public class SinkRecord extends ConnectRecord<SinkRecord> {
 
+    private Integer queueId;
     private final String brokerName;
     private final long queueOffset;
 
@@ -27,9 +28,15 @@ public class SinkRecord extends ConnectRecord<SinkRecord> {
     }
 
     public SinkRecord(String brokerName, long queueOffset, String topic, Integer queueId, Long timestamp, Schema schema, Object data, KeyValue extensions) {
-        super(topic, queueId, timestamp, schema, data, extensions);
+        super(topic, timestamp, schema, data, extensions);
         this.brokerName = brokerName;
         this.queueOffset = queueOffset;
+        this.queueId = queueId;
+    }
+
+
+    public Integer queueId(){
+        return queueId;
     }
 
     public String brokerName(){
