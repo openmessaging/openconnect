@@ -30,6 +30,16 @@ public class ConnectRecord {
     private Long timestamp;
 
     /**
+     * key schema
+     */
+    private Schema keySchema;
+
+    /**
+     * Payload of the key entry.
+     */
+    private Object key;
+
+    /**
      * Schema of the data entry.
      */
     private Schema schema;
@@ -63,12 +73,44 @@ public class ConnectRecord {
         this.data = data;
     }
 
+    public ConnectRecord(RecordPartition recordPartition, RecordOffset recordOffset,
+                         Long timestamp,Schema keySchema, Object key, Schema schema,
+                         Object data) {
+        this.position = new RecordPosition(recordPartition, recordOffset);
+        this.timestamp = timestamp;
+
+        // key
+        this.keySchema = keySchema;
+        this.key = key;
+
+        // value
+        this.schema = schema;
+        this.data = data;
+
+    }
+
     public Long getTimestamp() {
         return timestamp;
     }
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Schema getKeySchema() {
+        return keySchema;
+    }
+
+    public void setKeySchema(Schema keySchema) {
+        this.keySchema = keySchema;
+    }
+
+    public Object getKey() {
+        return key;
+    }
+
+    public void setKey(Object key) {
+        this.key = key;
     }
 
     public Schema getSchema() {
@@ -95,6 +137,18 @@ public class ConnectRecord {
         this.extensions = extensions;
     }
 
+    public RecordPosition getPosition() {
+        return position;
+    }
+
+    public void setPosition(RecordPosition position) {
+        this.position = position;
+    }
+
+    /**
+     * add extension by KeyValue
+     * @param extensions
+     */
     public void addExtension(KeyValue extensions) {
         if (this.extensions == null) {
             this.extensions = new DefaultKeyValue();
@@ -105,6 +159,11 @@ public class ConnectRecord {
         }
     }
 
+    /**
+     * add extension by key and value
+     * @param key
+     * @param value
+     */
     public void addExtension(String key, String value) {
         if (this.extensions == null) {
             this.extensions = new DefaultKeyValue();
@@ -112,6 +171,11 @@ public class ConnectRecord {
         this.extensions.put(key, value);
     }
 
+    /**
+     * get extension value
+     * @param key
+     * @return
+     */
     public String getExtension(String key) {
         if (this.extensions == null) {
             return null;
@@ -119,34 +183,29 @@ public class ConnectRecord {
         return this.extensions.getString(key);
     }
 
-    public RecordPosition getPosition() {
-        return position;
-    }
-
-    public void setPosition(RecordPosition position) {
-        this.position = position;
-    }
-
-    @Override public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (!(o instanceof ConnectRecord))
-            return false;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof ConnectRecord)) return false;
         ConnectRecord that = (ConnectRecord) o;
-        return Objects.equals(timestamp, that.timestamp) && Objects.equals(schema, that.schema) && Objects.equals(data, that.data) && Objects.equals(position, that.position) && Objects.equals(extensions, that.extensions);
+        return Objects.equals(timestamp, that.timestamp) && Objects.equals(keySchema, that.keySchema) && Objects.equals(key, that.key) && Objects.equals(schema, that.schema) && Objects.equals(data, that.data) && Objects.equals(position, that.position) && Objects.equals(extensions, that.extensions);
     }
 
-    @Override public int hashCode() {
-        return Objects.hash(timestamp, schema, data, position, extensions);
+    @Override
+    public int hashCode() {
+        return Objects.hash(timestamp, keySchema, key, schema, data, position, extensions);
     }
 
-    @Override public String toString() {
+    @Override
+    public String toString() {
         return "ConnectRecord{" +
-            "timestamp=" + timestamp +
-            ", schema=" + schema +
-            ", data=" + data +
-            ", position=" + position +
-            ", extensions=" + extensions +
-            '}';
+                "timestamp=" + timestamp +
+                ", keySchema=" + keySchema +
+                ", key=" + key +
+                ", schema=" + schema +
+                ", data=" + data +
+                ", position=" + position +
+                ", extensions=" + extensions +
+                '}';
     }
 }
