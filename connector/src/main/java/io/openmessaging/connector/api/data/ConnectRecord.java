@@ -34,6 +34,16 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
     private Long timestamp;
 
     /**
+     * key schema
+     */
+    private Schema keySchema;
+
+    /**
+     * Payload of the key entry.
+     */
+    private Object key;
+
+    /**
      * Schema of the data entry.
      */
     private Schema schema;
@@ -52,12 +62,27 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
         this(topic,  timestamp, schema, data, null);
     }
 
-    public ConnectRecord(String topic, Long timestamp, Schema schema, Object data,KeyValue extensions) {
+    public ConnectRecord(String topic, Long timestamp, Schema schema, Object data, KeyValue extensions) {
+        this(topic, timestamp, null, null, schema, data, extensions);
+    }
+
+    public ConnectRecord(String topic, Long timestamp,Schema keySchema, Object key, Schema schema, Object data) {
+        this(topic, timestamp, keySchema, key, schema, data, null);
+    }
+
+    public ConnectRecord(String topic, Long timestamp, Schema keySchema, Object key, Schema schema, Object data , KeyValue extensions) {
         this.topic = topic;
-        this.schema = schema;
         this.timestamp = timestamp;
+        // key
+        this.keySchema = keySchema;
+        this.key = key;
+
+        // value
+        this.schema = schema;
         this.data = data;
+        // extension
         this.extensions = extensions;
+
     }
 
 
@@ -69,7 +94,7 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
      * @param timestamp
      * @return
      */
-    public abstract R newRecord(String topic, Schema schema, Object data, Long timestamp);
+    public abstract R newRecord(String topic, Long timestamp, Schema keySchema, Object key,Schema schema, Object data);
 
     /**
      *  new record
@@ -80,7 +105,7 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
      * @param extensions
      * @return
      */
-    public abstract R newRecord(String topic, Schema schema, Object data, Long timestamp, KeyValue extensions);
+    public abstract R newRecord(String topic, Long timestamp, Schema keySchema, Object key,Schema schema, Object data, KeyValue extensions);
 
 
     public String getTopic() {
@@ -97,6 +122,22 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
 
     public void setTimestamp(Long timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public Schema getKeySchema() {
+        return keySchema;
+    }
+
+    public void setKeySchema(Schema keySchema) {
+        this.keySchema = keySchema;
+    }
+
+    public Object getKey() {
+        return key;
+    }
+
+    public void setKey(Object key) {
+        this.key = key;
     }
 
     public Schema getSchema() {
@@ -123,6 +164,10 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
         this.extensions = extensions;
     }
 
+    /**
+     * add extension by KeyValue
+     * @param extensions
+     */
     public void addExtension(KeyValue extensions) {
         if (this.extensions == null) {
             this.extensions = new DefaultKeyValue();
@@ -133,6 +178,11 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
         }
     }
 
+    /**
+     * add extension by key and value
+     * @param key
+     * @param value
+     */
     public void addExtension(String key, String value) {
         if (this.extensions == null) {
             this.extensions = new DefaultKeyValue();
@@ -140,6 +190,11 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
         this.extensions.put(key, value);
     }
 
+    /**
+     * get extension value
+     * @param key
+     * @return
+     */
     public String getExtension(String key) {
         if (this.extensions == null) {
             return null;
@@ -147,18 +202,17 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
         return this.extensions.getString(key);
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof ConnectRecord)) return false;
         ConnectRecord<?> that = (ConnectRecord<?>) o;
-        return Objects.equals(topic, that.topic) && Objects.equals(timestamp, that.timestamp) && Objects.equals(schema, that.schema) && Objects.equals(data, that.data) && Objects.equals(extensions, that.extensions);
+        return Objects.equals(topic, that.topic) && Objects.equals(timestamp, that.timestamp) && Objects.equals(keySchema, that.keySchema) && Objects.equals(key, that.key) && Objects.equals(schema, that.schema) && Objects.equals(data, that.data) && Objects.equals(extensions, that.extensions);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(topic, timestamp, schema, data, extensions);
+        return Objects.hash(topic, timestamp, keySchema, key, schema, data, extensions);
     }
 
     @Override
@@ -166,6 +220,8 @@ public abstract class ConnectRecord<R extends ConnectRecord<R>> {
         return "ConnectRecord{" +
                 "topic='" + topic + '\'' +
                 ", timestamp=" + timestamp +
+                ", keySchema=" + keySchema +
+                ", key=" + key +
                 ", schema=" + schema +
                 ", data=" + data +
                 ", extensions=" + extensions +

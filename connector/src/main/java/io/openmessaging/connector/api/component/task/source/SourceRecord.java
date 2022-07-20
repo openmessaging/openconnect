@@ -30,20 +30,20 @@ public class SourceRecord extends ConnectRecord<SourceRecord> {
 
     private final RecordPosition position;
 
-    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset, String topic, Schema schema, Object data, KeyValue extensions) {
-        this(recordPartition, recordOffset, topic, null,schema , data, extensions);
-    }
-
     public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset,String topic, Schema schema, Object data) {
-        this(recordPartition, recordOffset, topic, null, schema , data, null);
+        this(recordPartition, recordOffset, topic, null, null, null, schema , data, null);
     }
 
-    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset,String topic, Long timestamp, Schema schema, Object data) {
-        this(recordPartition, recordOffset, topic, timestamp, schema , data, null);
+    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset,String topic, Schema keySchema, Object key, Schema schema, Object data) {
+        this(recordPartition, recordOffset, topic, keySchema, key,  schema , data, null);
     }
 
-    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset, String topic, Long timestamp, Schema schema, Object data, KeyValue extensions) {
-        super(topic, timestamp, schema, data, extensions);
+    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset, String topic, Schema keySchema, Object key, Schema valueSchema, Object value, KeyValue extensions) {
+        this(recordPartition, recordOffset, topic, null, keySchema, key, valueSchema, value, extensions);
+    }
+
+    public SourceRecord(RecordPartition recordPartition, RecordOffset recordOffset, String topic, Long timestamp, Schema keySchema, Object key, Schema schema, Object data, KeyValue extensions) {
+        super(topic, timestamp, keySchema, key, schema, data, extensions);
         this.position = new RecordPosition(recordPartition, recordOffset);
     }
 
@@ -61,8 +61,8 @@ public class SourceRecord extends ConnectRecord<SourceRecord> {
      * @return
      */
     @Override
-    public SourceRecord newRecord(String topic, Schema schema, Object data, Long timestamp) {
-        return newRecord(topic, schema , data, timestamp, null );
+    public SourceRecord newRecord(String topic, Long timestamp, Schema keySchema, Object key,Schema schema, Object data) {
+        return newRecord(topic, timestamp, keySchema, key, schema , data, null );
     }
 
     /**
@@ -76,8 +76,8 @@ public class SourceRecord extends ConnectRecord<SourceRecord> {
      * @return
      */
     @Override
-    public SourceRecord newRecord(String topic, Schema schema, Object data, Long timestamp, KeyValue extensions) {
-        return new SourceRecord(position().getPartition(), position().getOffset(), topic, timestamp, schema, data, extensions);
+    public SourceRecord newRecord(String topic, Long timestamp, Schema keySchema, Object key,Schema schema, Object data, KeyValue extensions) {
+        return new SourceRecord(position().getPartition(), position().getOffset(), topic, timestamp, keySchema, key, schema, data, extensions);
     }
 
     @Override

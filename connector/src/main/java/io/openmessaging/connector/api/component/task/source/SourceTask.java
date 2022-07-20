@@ -16,7 +16,9 @@ package io.openmessaging.connector.api.component.task.source;
 
 import io.openmessaging.connector.api.component.task.Task;
 import io.openmessaging.connector.api.data.ConnectRecord;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * The source task API definition is used to define the logic for data pulling
@@ -39,20 +41,19 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
     public abstract List<SourceRecord> poll() throws InterruptedException;
 
     /**
-     * <p>
-     * Commit an individual {@link ConnectRecord} when the callback from the producer client is received.
-     * </p>
-     * <p>
-     * SourceTasks are not required to implement this functionality;Connect System will record offsets
-     * automatically. This hook is provided for systems that also need to store offsets internally
-     * in their own system.
-     * </p>
-     *
-     * @throws InterruptedException task thread interupt exception
-     * @param records connect records
+     * batch commit
+     * @param records
+     * @param metadata
      */
-    public void commit(final List<SourceRecord> records) throws InterruptedException {
-        commit();
+    public void commit(final List<SourceRecord> records, Map<String,String> metadata) throws InterruptedException {
+    }
+    /**
+     * commit record
+     * @param record
+     * @param metadata
+     */
+    public void commit(final SourceRecord record, Map<String,String> metadata) throws InterruptedException {
+
     }
 
     /**
