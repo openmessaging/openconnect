@@ -415,6 +415,6 @@ public class SchemaBuilder {
      */
     public Schema build() {
         return new Schema(name, type, isOptional(), defaultValue, version, doc,
-                fields == null ? null : Collections.unmodifiableList(new ArrayList<>(fields.values())), keySchema, valueSchema, parameters);
+                fields == null ? null : new ArrayList<>(fields.values()), keySchema, valueSchema, parameters);
     }
 }
