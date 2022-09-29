@@ -22,6 +22,7 @@ import io.openmessaging.connector.api.errors.ConnectException;
 
 import java.math.BigDecimal;
 import java.nio.ByteBuffer;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumMap;
@@ -275,6 +276,12 @@ public class Schema {
      * @param field field
      */
     public void addField(Field field) {
+        if (this.fields == null) {
+            this.fields = new ArrayList<>();
+        }
+        if (this.fieldsByName == null) {
+            this.fieldsByName = new HashMap<>();
+        }
         this.fields.add(field);
         this.fieldsByName.put(field.getName(), field);
     }
