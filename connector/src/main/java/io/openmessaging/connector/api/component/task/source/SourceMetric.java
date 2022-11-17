@@ -13,6 +13,8 @@ package io.openmessaging.connector.api.component.task.source;
  * limitations under the License.
  */
 
+import java.util.Map;
+
 public class SourceMetric {
     /**
      * The delay time of source
@@ -22,6 +24,11 @@ public class SourceMetric {
      * The diff offset of source
      */
     private Long diffOffset;
+
+    /**
+     * other metrics
+     */
+    private Map<String, Object> others;
 
     public Long getDelayTime() {
         return delayTime;
@@ -37,5 +44,13 @@ public class SourceMetric {
 
     public void setDiffOffset(Long diffOffset) {
         this.diffOffset = diffOffset;
+    }
+
+    public Map<String, Object> getOthers() {
+        return others;
+    }
+
+    public void setOthers(Map<String, Object> others) {
+        this.others = others;
     }
 }
