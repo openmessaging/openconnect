@@ -82,7 +82,7 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
      * return the metrics of source.
      * @return
      */
-    public SourceMetric getMetric() {
+    public SourceMetrics getMetrics() {
         return null;
     }
 }

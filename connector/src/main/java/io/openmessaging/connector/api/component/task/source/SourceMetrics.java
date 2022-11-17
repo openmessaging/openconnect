@@ -15,7 +15,7 @@ package io.openmessaging.connector.api.component.task.source;
 
 import java.util.Map;
 
-public class SourceMetric {
+public class SourceMetrics {
     /**
      * The delay time of source
      */
