@@ -77,4 +77,12 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
      * function.
      */
     public void commit() { }
+
+    /**
+     * return the metrics of source.
+     * @return
+     */
+    public SourceMetric getMetric() {
+        return null;
+    }
 }
