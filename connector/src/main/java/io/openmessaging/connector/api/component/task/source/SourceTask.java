@@ -35,41 +35,25 @@ public abstract class SourceTask implements Task<SourceTaskContext> {
     /**
      * Poll this source task for new records.
      *
-     * @return connectRecord list
+     * @return SourceRecord list
      * @throws InterruptedException task thread interupt exception
      */
-    public abstract List<ConnectRecord> poll() throws InterruptedException;
-
+    public abstract List<SourceRecord> poll() throws InterruptedException;
 
     /**
      * batch commit
      * @param records
      * @param metadata
      */
-    public void commit(final List<ConnectRecord> records, Map<String,String> metadata) {
+    public void commit(final List<SourceRecord> records, Map<String,String> metadata) throws InterruptedException {
     }
     /**
      * commit record
      * @param record
      * @param metadata
      */
-    public void commit(final ConnectRecord record, Map<String,String> metadata) {
-        commit(record);
-    }
+    public void commit(final SourceRecord record, Map<String,String> metadata) throws InterruptedException {
 
-    /**
-     * <p>
-     * Commit an individual {@link ConnectRecord} when the callback from the producer client is received.
-     * </p>
-     * <p>
-     * SourceTasks are not required to implement this functionality;Connect System will record offsets
-     * automatically. This hook is provided for systems that also need to store offsets internally
-     * in their own system.
-     * </p>
-     *
-     * @param record connect record
-     */
-    public void commit(final ConnectRecord record) {
     }
 
     /**
