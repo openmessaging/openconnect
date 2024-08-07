@@ -22,8 +22,10 @@
 
     <groupId>io.openmessaging</groupId>
     <artifactId>openmessaging-connect</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.5-SNAPSHOT</version>
     <name>OpenMessaging Connect</name>
+    <description>OpenConnect is a standard to connect between data sources and data destinations. Users could easily create connector instances with configurations via REST API. </description>
+    <url>git@github.com:openmessaging/openmessaging-connect.git</url>
     <packaging>pom</packaging>
 
     <modules>
@@ -130,6 +132,31 @@
                 <version>3.0.2</version>
                 <configuration>
                     <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.3</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>sonatype-nexus-staging</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
             </plugin>
         </plugins>
