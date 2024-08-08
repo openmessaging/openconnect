@@ -22,7 +22,7 @@
 
     <groupId>io.openmessaging</groupId>
     <artifactId>openmessaging-connect</artifactId>
-    <version>0.1.5</version>
+    <version>0.1.6-SNAPSHOT</version>
     <name>OpenMessaging Connect</name>
     <description>OpenConnect is a standard to connect between data sources and data destinations. Users could easily create connector instances with configurations via REST API. </description>
     <url>git@github.com:openmessaging/openmessaging-connect.git</url>
