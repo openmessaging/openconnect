@@ -28,7 +28,7 @@ public abstract class Connector<R extends ComponentContext> implements Component
         this.connectorContext = connectorContext;
     }
 
-    protected ConnectorContext getConnectorContext() {
+    protected ConnectorContext context() {
         return connectorContext;
     }
 

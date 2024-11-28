@@ -21,4 +21,8 @@ import io.openmessaging.connector.api.component.connector.Connector;
  */
 public abstract class SourceConnector extends Connector {
 
+    @Override
+    protected SourceConnectorContext context() {
+        return (SourceConnectorContext) connectorContext;
+    }
 }

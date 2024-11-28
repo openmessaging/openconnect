@@ -21,7 +21,9 @@ import io.openmessaging.connector.api.component.connector.Connector;
  */
 public abstract class SinkConnector extends Connector {
 
-    public SinkConnector() {
-        super();
+
+    @Override
+    protected SinkConnectorContext context() {
+        return (SinkConnectorContext) connectorContext;
     }
 }
